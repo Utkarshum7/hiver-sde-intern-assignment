@@ -155,6 +155,68 @@ exact validation-gate status plus a non-golden pipeline smoke test — see
 
 ---
 
+## Local Demo
+
+A minimal local FastAPI server ([scripts/demo_server.py](scripts/demo_server.py))
+so you can exercise the live agent from a browser instead of the Python
+REPL. It calls `DeltaSupportAgent.handle()` and returns the same 5 fields
+the pipeline already produces — `intent`, `reply`, `escalate`,
+`escalation_reason`, `evidence`.
+
+**Demo-only safety override — not part of the evaluated agent.** The demo
+server adds one additional, narrow, deterministic check on top of (never
+instead of) the real agent's own escalation decision: if the agent says
+`escalate: no` but the customer message contains specific claim/account
+phrasing (e.g. "file a claim", "baggage claim", "lost baggage", "missing
+luggage", "damaged suitcase", "broken wheel", "refund my booking",
+"booking reference", "reservation number"), the demo forces `escalate:
+yes` and replaces the reply with a safe escalation notice, so the UI never
+shows a confident policy answer for what looks like a real claim. This
+logic lives **entirely in `scripts/demo_server.py`** — it does not touch
+`src/agent.py`, `src/classifier.py`, `src/escalation.py`, or
+`scripts/evaluate.py` in any way. **The headline evaluation numbers in
+[REPORT.md](REPORT.md) and `reports/evaluation_results.json` were measured
+against the real agent only and do NOT include this override** — they are
+a strictly lower bound on the demo's actual escalation safety, not an
+overstatement of it. When the override activates, the UI visibly labels it
+("⚠ Safety override applied") so it's never mistaken for the model's own
+decision.
+
+**Install** (adds two small dependencies, `fastapi` and `uvicorn`, on top
+of the base `requirements.txt`):
+
+```powershell
+pip install -r requirements.txt
+```
+
+**Launch** (requires `data/processed/intent_classifier.pkl` and
+`retrieval_index.pkl` to already exist — see "Full Data Preparation" above
+if you haven't run that yet):
+
+```powershell
+python -m uvicorn scripts.demo_server:app --host 127.0.0.1 --port 8000
+```
+
+**Open in a browser:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+The model/retrieval-index load happens **once, at server startup**, and
+takes **approximately 17 seconds** the first time (cold OS file cache) —
+the page won't be reachable until that finishes. Every request after that
+is fast (~15ms). Sample messages (also available as one-click buttons on
+the page itself):
+
+- `How much does a second checked bag cost on an international flight?`
+- `My flight was cancelled, I need to get to Boston tonight!`
+- `My suitcase came out with a broken wheel, how do I file a claim?`
+
+**This is an offline demonstration only.** Like the underlying agent, it
+never performs a live Delta action — no flight-status lookup, no
+booking/PNR change, no refund, no baggage trace, no account access. Every
+reply is either grounded in retrieved historical evidence / static policy
+facts, or an escalation notice explaining why a human is needed.
+
+---
+
 ## Reproduction — Golden-Set Annotation (complete; commands kept for reference/audit)
 
 ```powershell
@@ -193,11 +255,12 @@ python scripts/compute_judge_human_agreement.py
 pytest
 ```
 
-**111 tests, all passing**, covering intent classification, escalation
+**121 tests, all passing**, covering intent classification, escalation
 policy, retrieval leakage isolation, reply-generation grounding/safety,
 baselines, evaluation metrics (on synthetic fixtures only — never the
-golden set), annotation provenance, and the end-to-end agent pipeline
-contract.
+golden set), annotation provenance, the end-to-end agent pipeline
+contract, and the local demo server (with the model load mocked, so the
+suite never pays the real ~17s load cost).
 
 ---
 
