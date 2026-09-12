@@ -1,101 +1,246 @@
-# Hiver SDE Intern Assignment - AI Customer Support Agent
+# Hiver SDE Intern Assignment — AI Customer Support Agent (@Delta)
 
-This repository contains an end-to-end AI Customer Support Agent pipeline built on the Kaggle *Customer Support on Twitter* dataset (`thoughtvector/customer-support-on-twitter`).
+End-to-end AI customer-support agent for **Delta Air Lines** (`@Delta`),
+built on the Kaggle *Customer Support on Twitter* dataset
+(`thoughtvector/customer-support-on-twitter`).
 
----
-
-## Phase 1: Environment Setup & Dataset Profiling
-
-### Requirements & Prerequisites
-- **Python Version**: `Python 3.12` (or 3.11+)
-- **Git**: Installed and initialized
-
-### Environment Setup
-
-1. **Clone & Navigate to Repository**:
-   ```bash
-   git clone <repo-url>
-   cd Hiver-assignment
-   ```
-
-2. **Create and Activate Virtual Environment**:
-   ```powershell
-   # Windows PowerShell
-   py -3.12 -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
-
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+**Full report (executive summary + full evidence appendix — problem
+framing, results, failure analysis, decision log, "what's misleading about
+my headline number," etc.): [REPORT.md](REPORT.md).** This README covers
+setup, reproduction, architecture, and where things live.
 
 ---
 
-## Dataset Acquisition
+## Project Status (real, as of this writing)
 
-> **Warning**: The raw Kaggle dataset (`twcs.csv`, ~500 MB - 1 GB) is **not committed** to Git and is excluded via `.gitignore`. Do not commit raw data files.
+* **Brand:** `@Delta` — 26,168 reconstructed conversation threads (87,994 messages)
+* **Intent taxonomy:** 10 empirically-derived categories ([docs/intent_taxonomy.md](docs/intent_taxonomy.md))
+* **Retrieval:** leakage-safe TF-IDF + cosine similarity over 20,913 historical evidence units ([docs/retrieval_design.md](docs/retrieval_design.md))
+* **Agent:** intent classification → retrieval → grounded reply generation → escalation decision ([src/agent.py](src/agent.py))
+* **Baselines:** trivial + simple-retrieval, both implemented and evaluated ([src/baselines.py](src/baselines.py))
+* **Golden evaluation set:** 200 stratified examples sampled from held-out data — **200/200 (100%) human-annotated and locked**, all 14 required validation gates pass ([REPORT.md §9](REPORT.md#9-golden-set-methodology))
+* **Headline results:** **real, measured once** against the locked golden set — intent accuracy **56.5%**, macro F1 **58.3%**, escalation F1 **63.9%**, escalation **recall 51.7%** (the important safety-relevant weakness — see [REPORT.md §12/§16](REPORT.md#12-results)), 0% unsupported-claim rate in generated replies
+* **LLM-as-judge:** infrastructure complete, **PENDING** real scores (no `ANTHROPIC_API_KEY` configured)
+* **Human-agreement:** infrastructure complete, **PENDING** (0/20 rating-sheet rows filled in)
 
-Place the raw dataset CSV under `data/raw/twcs.csv`.
+---
 
-### Option A: Kaggle API CLI (Recommended if configured)
-If you have your Kaggle API key configured (`~/.kaggle/kaggle.json` or `KAGGLE_USERNAME`/`KAGGLE_KEY` environment variables):
-```bash
-kaggle datasets download -d thoughtvector/customer-support-on-twitter -p data/raw/ --unzip
+## Architecture
+
+```
+CUSTOMER MESSAGE
+      |
+      v
+INTENT CLASSIFICATION   src/classifier.py   (TF-IDF + Logistic Regression,
+      |                                      weak-supervised on dev corpus)
+      v
+HISTORICAL RETRIEVAL    src/retrieval.py    (TF-IDF + cosine similarity,
+      |                                      dev corpus only, top-k=3)
+      v
+EVIDENCE                top-k historical (customer_message, delta_response) pairs
+      v
+REPLY GENERATION        src/reply_generator.py  (grounded, offline, strips
+      |                                          unsupported action claims)
+      v
+ESCALATION DECISION     src/escalation.py   (deterministic policy)
+      v
+FINAL RESPONSE          { intent, reply, escalate, escalation_reason, evidence }
 ```
 
-### Option B: Manual Download via Kaggle Web UI
-1. Visit [Customer Support on Twitter on Kaggle](https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter).
-2. Download `customer-support-on-twitter.zip`.
-3. Extract `twcs.csv` and place it in the project folder at:
-   `data/raw/twcs.csv`
+Every stage has its own module and its own test file (`tests/test_classifier.py`,
+`tests/test_retrieval.py`, `tests/test_reply_generator.py`, `tests/test_escalation.py`,
+plus `tests/test_agent.py` for the end-to-end wiring). Full diagram + design
+rationale for each stage: [REPORT.md §6](REPORT.md#6-architecture).
+
+**Example agent behavior** (real output, non-golden example messages — run yourself with `python scripts/evaluate.py`, which includes this smoke test):
+
+```
+MSG: My suitcase came out with a broken wheel, how do I file a claim?
+  -> intent=general_complaint_feedback (conf=0.45)  escalate=yes
+     reason: Customer feedback escalated due to account-specific reference detected.
+     reply: Thanks for reaching out, and sorry for the trouble. This one needs
+            a specialist who can pull up your booking/account details...
+
+MSG: How much does a second checked bag cost on an international flight?
+  -> intent=flight_status_inquiry (conf=0.75)  escalate=no
+     reply: Thanks for reaching out to Delta! Hey Charlotte! That's right, all
+            of your luggage is arranged for during your check-in window.
+```
+
+Note the first example: intent was misclassified (should be
+`lost_damaged_baggage`) but the escalation policy's account-signal
+detection still caught it and escalated correctly — real defense-in-depth,
+not a cherry-picked success. The second example shows a real, measured
+weakness left in on purpose: the intent was misclassified (should be
+`baggage_allowance_policy`), so the grounded reply answers the wrong
+question — a live instance of the `flight_status_inquiry` over-prediction
+bug quantified in [REPORT.md §16](REPORT.md#16-top-5-failure-modes) failure mode 3.
 
 ---
 
-## Running Dataset Profiling
+## Environment & Dependency Setup
 
-To inspect and profile the dataset memory-efficiently (using streaming chunks):
+**Requirements:** Python 3.12 (or 3.11+), Git.
 
-```bash
-python scripts/profile_dataset.py --input data/raw/twcs.csv
+```powershell
+# Windows PowerShell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
 
-### Running Unit Tests
-To verify test suites and reusable profiler components:
-```bash
+The optional LLM judge / LLM reply-generation path needs an Anthropic API
+key, never required for the rest of the pipeline:
+
+```powershell
+$env:ANTHROPIC_API_KEY = "sk-ant-..."   # optional; omit to run fully offline
+```
+
+---
+
+## Reproduction — Full Data Preparation
+
+**Only needed once**, or after changing the raw dataset / splitting logic.
+Requires `data/raw/twcs.csv` (~500 MB, download from Kaggle — not committed
+to this repo; see `.gitignore`). **Takes a few minutes** on the full
+26,168-conversation Delta subset (the assignment explicitly does not
+require running against the full 3M-row raw dataset beyond this one
+extraction pass).
+
+```powershell
+# 1. Extract Delta conversation threads from the raw Kaggle CSV (~1-2 min)
+python scripts/build_delta_dataset.py
+# -> data/processed/delta_conversations.parquet, delta_messages.parquet
+
+# 2. Leakage-safe 80/20 conversation-level split + fit the TF-IDF retrieval index (~30s)
+python scripts/build_retrieval_index.py
+# -> data/processed/dev_corpus.parquet, reserved_golden_pool.parquet, retrieval_index.pkl
+
+# 3. Train the live agent's intent classifier (dev corpus only, weak-supervised) (~10-20s)
+python scripts/train_classifier.py
+# -> data/processed/intent_classifier.pkl
+
+# 4. (Optional, already run once) Retrieval sanity check
+python scripts/test_retrieval.py
+# -> reports/retrieval_sanity_check.md
+```
+
+---
+
+## Reproduction — Headline Evaluation (target: <15 minutes; actual: seconds)
+
+This step only **loads** the artifacts built above — it does not touch the
+raw dataset and finishes in a few seconds once step 1-3 above have run.
+
+```powershell
+python scripts/evaluate.py
+```
+
+Since the golden set is complete and locked, this **computes and writes real
+results**:
+- `reports/evaluation_results.json` — full metrics (intent accuracy/macro-F1/per-intent
+  P-R-F1/support/confusion matrix; escalation accuracy/precision/recall/F1/confusion
+  matrix/FP-FN; a supplementary retrieval proxy metric; automated reply-safety rate),
+  a fresh leakage recheck, and LLM-judge/human-agreement status — for the main agent
+  and both baselines, side by side.
+- `reports/evaluation_raw_predictions.json` — every one of the 200×3 raw
+  predictions (gold vs. predicted intent/escalate, full reply text, evidence
+  used) — this is what the failure-mode analysis in REPORT.md §16 is read from.
+- `reports/evaluation_report.md` — human-readable summary of the above.
+
+If you delete/reset a portion of `golden_annotation.csv`'s `gold_intent`
+column, this script will instead refuse to compute results and print the
+exact validation-gate status plus a non-golden pipeline smoke test — see
+[REPORT.md §11](REPORT.md#11-evaluation-methodology) for why that guardrail exists.
+
+---
+
+## Reproduction — Golden-Set Annotation (complete; commands kept for reference/audit)
+
+```powershell
+python scripts/propose_golden_labels.py       # generates AI/rule proposals (never touches gold labels)
+python scripts/review_golden_proposals.py --batch   # human batch review, 10 at a time
+python scripts/validate_golden_set.py         # 14 quality gates incl. leakage checks
+```
+
+Full annotator protocol: [docs/golden_annotation_guide.md](docs/golden_annotation_guide.md).
+Full sampling/labelling methodology write-up: [docs/golden_set_methodology.md](docs/golden_set_methodology.md).
+
+---
+
+## Reproduction — Reply-Quality Judge & Human Agreement (infrastructure ready, PENDING real inputs)
+
+Samples from the **development corpus** (never the golden set), so this
+runs independently of golden-set status:
+
+```powershell
+python scripts/build_human_rating_sheet.py --n 20
+# -> data/eval/human_rating_sheet.csv  (fill in the human_* columns yourself)
+# -> data/eval/llm_judge_results.json  (real scores if ANTHROPIC_API_KEY is set,
+#                                        otherwise honestly marked "pending_no_api_key")
+
+python scripts/compute_judge_human_agreement.py
+# -> reports/judge_human_agreement.json (only once BOTH real human ratings
+#                                          and real judge scores exist; prints
+#                                          exactly what's missing otherwise)
+```
+
+---
+
+## Tests
+
+```powershell
 pytest
 ```
 
----
-
-## Expected Output Artifacts
-
-Upon running `scripts/profile_dataset.py`, the following profile artifacts will be generated in `reports/`:
-
-- `reports/data_profile.json`: Full machine-readable dataset statistics, message metrics, thread analysis, and brand candidate counts.
-- `reports/data_profile.md`: Human-readable Markdown summary report.
+**111 tests, all passing**, covering intent classification, escalation
+policy, retrieval leakage isolation, reply-generation grounding/safety,
+baselines, evaluation metrics (on synthetic fixtures only — never the
+golden set), annotation provenance, and the end-to-end agent pipeline
+contract.
 
 ---
 
-## Repository Layout (Phase 1)
-```
-Hiver-assignment/
-├── .gitignore                          # Exclusions for .venv, data/raw, cache, etc.
-├── pytest.ini                          # Pytest configuration
-├── README.md                           # Reproducibility & Phase 1 documentation
-├── requirements.txt                    # Pinned Python dependencies
-├── Hiver SDE Intern Assignment.pdf     # Original assignment prompt
-├── data/
-│   ├── raw/                            # Place raw twcs.csv here (git-ignored)
-│   └── processed/                      # Filtered/processed brand data (git-ignored)
-├── src/
-│   ├── __init__.py
-│   └── profiler.py                     # Streaming chunk profiler & schema parser
-├── scripts/
-│   └── profile_dataset.py              # CLI entry point to run profiling
-├── reports/
-│   ├── data_profile.json               # (Generated) Machine-readable metrics
-│   └── data_profile.md                 # (Generated) Human-readable summary
-└── tests/
-    └── test_profiler.py                # Unit tests for profiler
-```
+## Where Artifacts Live
+
+| What | Path | Committed? |
+|---|---|---|
+| Raw dataset | `data/raw/twcs.csv` | No (download from Kaggle; ~500MB) |
+| Processed conversations/splits/index/classifier | `data/processed/*.parquet`, `*.pkl` | No (regenerable via the scripts above) |
+| **Golden evaluation set (the human-labelled deliverable)** | `data/golden_eval/golden_annotation.csv` | **Yes** |
+| AI/rule-based proposals (not ground truth) | `data/golden_eval/golden_proposals.csv` | Yes |
+| Human rating sheet + judge cache/results | `data/eval/*.csv`, `data/eval/*.json` | Yes (CSV); judge cache/results JSON yes |
+| Evaluation results, raw predictions, reports | `reports/*.json`, `reports/*.md` | Yes |
+| Source code | `src/`, `scripts/`, `tests/` | Yes |
+
+---
+
+## Known Limitations / Not Implemented
+
+The agent **never** claims to do the following — every one of these is
+handled by escalating to a human, not by pretending to perform it:
+
+- No live Delta flight-status API (no real-time gate/delay lookup)
+- No PNR/booking modification (seat, itinerary, reservation changes)
+- No refund/payment gateway
+- No baggage-tracing system
+- No customer-account access (SkyMiles balance, Medallion status, booking history)
+
+Whether the escalation policy reliably catches every case that needs one of
+the above is a *measured, not assumed* question — see the real 51.7%
+escalation recall and the quantified regex-coverage gap in
+[REPORT.md §12/§16](REPORT.md#12-results). Full limitations list: [REPORT.md §18](REPORT.md#18-limitations).
+
+---
+
+## Project Documentation
+
+* [REPORT.md](REPORT.md) — executive summary + full evidence appendix (problem framing, architecture, evaluation methodology, real results, failure analysis, "what's misleading about my headline number," limitations, one-more-week plan)
+* [docs/requirements_checklist.md](docs/requirements_checklist.md) — final adversarial review, requirement-by-requirement, PASS/PENDING/FAIL with evidence
+* [docs/decision_log.md](docs/decision_log.md) — non-obvious engineering decisions and why
+* [docs/intent_taxonomy.md](docs/intent_taxonomy.md) — intent definitions, real examples, capability boundaries
+* [docs/escalation_policy.md](docs/escalation_policy.md) — escalation decision matrix
+* [docs/retrieval_design.md](docs/retrieval_design.md) — retrieval evidence design & leakage prevention
+* [docs/brand_selection.md](docs/brand_selection.md) — brand candidate empirical analysis
+* [docs/golden_set_methodology.md](docs/golden_set_methodology.md) — sampling & annotation methodology
+* [docs/golden_annotation_guide.md](docs/golden_annotation_guide.md) — annotator instructions

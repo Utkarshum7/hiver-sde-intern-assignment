@@ -1,0 +1,14 @@
+{
+  "brand": "Delta",
+  "total_raw_tweets_scanned": 2811774,
+  "total_reconstructed_conversations": 26168,
+  "two_way_conversations_count": 26166,
+  "one_way_conversations_count": 2,
+  "total_thread_messages": 87994,
+  "avg_thread_length": 3.36,
+  "median_thread_length": 2.0,
+  "date_range": {
+    "start": "Fri Apr 07 11:03:47 +0000 2017",
+    "end": "Wed Oct 25 23:59:02 +0000 2017"
+  }
+}

@@ -1,0 +1,266 @@
+[
+  {
+    "intent_id": "flight_status_inquiry",
+    "intent_name": "Flight Status & Schedule Inquiry",
+    "definition": "Customer inquiring about current flight status, gate changes, arrival/departure schedules, or flight tracking.",
+    "belongs": [
+      "Checking if flight DL123 is on time",
+      "Asking for gate assignment",
+      "Inquiring about arrival time"
+    ],
+    "does_not_belong": [
+      "Rebooking a cancelled flight",
+      "Claiming lost baggage",
+      "Asking for refund"
+    ],
+    "available_examples": 11666,
+    "pct_of_data": 44.58,
+    "suitable_auto_handle": true,
+    "sample_real_examples": [
+      "@824 I'm hoping to make a connection in Seattle but this Portland flight is delayed. Have any help you can assist?",
+      "My flight on @delta from Singapore to Narita #deltaairlines #review #airline #travel https://t.co/5JLiwlTXom https://t.co/DFBzsck6E9",
+      "Hey @delta, my last scheduled flight of the year is Friday afternoon - DAL to ATL. \nCan I get just ONE upgrade in 2017? #SilverMedallion",
+      "@824 hi, looks like I will miss my 4 pm to ewr because of Thalys. Help!",
+      "@Delta Arrived at ORF for my 10:17am flight to LGA. Told it was delayed 25 mins. Still here at 11:43am. Missed my connection to Boston and will miss them conference meeting I\u2019m supposed to attend. Now I\u2019m hearing the plane we\u2019re supposed to board hasn\u2019t even left LGA. Frustrating",
+      "7 hour flight delay. Good work @Delta !",
+      "Hey @Delta...any chance we\u2019ll see the 5:30pm MSP&gt;MKE flight return to the schedule? #8:30pmFlightNoBueno",
+      "@Delta I was just forced to check my appropriately sized carry on because I was told there was no room, I got on the plane &amp; plenty of room."
+    ]
+  },
+  {
+    "intent_id": "flight_delay_rebooking",
+    "intent_name": "Flight Delay & Cancellation Rebooking",
+    "definition": "Customer seeking urgent assistance or rebooking due to cancelled flights, missed connections, or severe delays.",
+    "belongs": [
+      "I missed my connecting flight due to delay",
+      "Flight was cancelled, need next available flight",
+      "Stuck at airport needing rebooking"
+    ],
+    "does_not_belong": [
+      "General flight status check without cancellation",
+      "Voluntary flight date change months in advance"
+    ],
+    "available_examples": 601,
+    "pct_of_data": 2.3,
+    "suitable_auto_handle": false,
+    "sample_real_examples": [
+      "@Delta hi- i received a notification that i was on standby when i checked in. I sent a dm with information. Please confirm back that this is not the case.",
+      "@delta why are you giving some folks $100 miles for cancel of DL4734 but not me?  3 DL flights to EU this month = ????",
+      "@Delta you\u2019ll immediately apologize for delays but what about my 8 week old\u2019s lost car seat and stroller! No big deal, not a safety issue!",
+      "@delta stuck on a tarmac at CLE because the ground crew hasn\u2019t shown up. #goldmedallion #switchingtounited #flight4050",
+      "@Delta  are you canceling flights to STT starting in Boston for dates in 2018? I\u2019m reading people are getting canceled.",
+      "@DELTA how do I cancel a reservation from the app?",
+      "#WhatsHappening I\u2019n stuck without food &amp; no money thanks to @Delta",
+      "Fool me once, shame on you. Fool me twice, shame on me. When a @Delta customer service agent laughs at you instead of providing service you cancel your Delta @116988 and switch to @SouthwestAir. #ThanksForNothing"
+    ]
+  },
+  {
+    "intent_id": "baggage_allowance_policy",
+    "intent_name": "Baggage Allowance & Fee Policy",
+    "definition": "Questions regarding general baggage policies, checked bag pricing, weight/size limits, or special item rules.",
+    "belongs": [
+      "How much is the second checked bag fee?",
+      "Size limit for carry-on luggage",
+      "Military baggage allowance rules"
+    ],
+    "does_not_belong": [
+      "Claiming a lost/stolen bag",
+      "Reporting damaged luggage"
+    ],
+    "available_examples": 186,
+    "pct_of_data": 0.71,
+    "suitable_auto_handle": true,
+    "sample_real_examples": [
+      "@Delta can I carry on a frozen apple pie from Seattle to bring back to my husband in Los Angeles? He misses a good homemade apple pie.",
+      "@delta can I bring zucchini bread &amp; quail eggs in my carry-on luggage??",
+      "@Delta I am silver and have platinum card, fri wife and I fly to China. Need 3 checked+2 carry on, any way we can get all that done no cost?",
+      "@Delta how do I print a baggage fee receipt from the delta app?",
+      "@Delta what is the checked luggage allowance from London to Boston for economy class please? What is the cabin baggage allowance and how much would it be for an extra checked bag on the return flight please?",
+      "@Delta  what\u2019s the best way to carry on a wedding dress for destination wedding in the Dominican?",
+      "@Delta When it comes to bicycle, will I pay the applicable charge for the first checked bag?",
+      "@Delta can I bring a poster tube in the cabin along with my carry-on and handbag?"
+    ]
+  },
+  {
+    "intent_id": "lost_damaged_baggage",
+    "intent_name": "Lost or Damaged Baggage Claim",
+    "definition": "Customer reporting missing, delayed, lost, or physically damaged baggage after arrival.",
+    "belongs": [
+      "My bag did not come out on carousel",
+      "Suitcase wheel was broken during flight",
+      "Lost bag claim tracking"
+    ],
+    "does_not_belong": [
+      "Asking how much a checked bag costs"
+    ],
+    "available_examples": 59,
+    "pct_of_data": 0.23,
+    "suitable_auto_handle": false,
+    "sample_real_examples": [
+      "I still hate checking luggage, but the @Delta push notifications are timed almost perfectly. No need to stand around baggage claim.",
+      "@824 sent you a complaint about lost baggage claim, days past, and no response whatsoever...",
+      "@Delta -had damage to my suitcase today that I noticed when I got home from the airport. Your CS gave bad info. How do I file a claim?",
+      "@delta I received an email to complete a survey about my baggage claim that was recently completed yet I\u2019ve not heard anything from them",
+      "@Delta @35637 congrats! Great employees. From a skymiles member who is Pro Delta",
+      "Unacceptable @delta I should be walking to my car service but instead I am forced to wait in baggage claim! #deltafail",
+      "@Delta you flew a very special group of performers @113606 back from a NYC charity event this past Monday Nov. 27. But, they lost x3 SD cards with wonderful memories @122122 Terminal 4 prior to boarding DL464. Lost Item #1369990 Please help!",
+      "Could you advise me on my lost baggage claim ? @Delta"
+    ]
+  },
+  {
+    "intent_id": "seat_assignment_upgrade",
+    "intent_name": "Seat Selection & Upgrade Request",
+    "definition": "Customer asking to select, change, or upgrade seats, or requesting family/group seating assistance.",
+    "belongs": [
+      "Can I upgrade to First Class with miles?",
+      "Want to sit next to my spouse",
+      "Changing from aisle to window seat"
+    ],
+    "does_not_belong": [
+      "Asking for a full ticket cash refund"
+    ],
+    "available_examples": 1502,
+    "pct_of_data": 5.74,
+    "suitable_auto_handle": true,
+    "sample_real_examples": [
+      "@Delta, what's the pay to change flights on day of a scheduled flight?",
+      "\u2708\ufe0f DTW to TPA \u2708\ufe0f  \n\nSpending a long seeking at @122197 \n\nThanks @Delta for the amazing first class seats. #CustomerExperience #CX https://t.co/Vv9pbpNMBx",
+      "@Delta I booked a flight today for tomorrow, but I can't request Delta Comft + upgrade, only First Class.",
+      "@Delta when I checked my seat  Wednesday you had it booked as delta one, now it's main cabin, why the change?!",
+      "@Delta How do expect people with children fly with your airline? The Basic Economy does not allow seat assignments and this alone will prevent me from booking travel...very sad as you have always been my go to airline.",
+      "@Delta you guys did it to me again!\nI\u2019m silver and up \u201cupgraded\u201d me to a g-damn middle seat!\nI stopped that in my profile.\nReally hating u",
+      "Good afternoon @Delta. I have an upcoming flt and I would like to change my seats to window seats. Could you assist?",
+      "@Delta - just sat on a plane for 4 hours for maintenance, made to switch planes &amp; DOWNGRADED from Comfort+ seats to main cabin..."
+    ]
+  },
+  {
+    "intent_id": "skymiles_loyalty_program",
+    "intent_name": "SkyMiles & Medallion Loyalty Program",
+    "definition": "Inquiries regarding Delta SkyMiles balance, Medallion status benefits, SkyClub lounge access, or mile redemption.",
+    "belongs": [
+      "Did not receive SkyMiles for recent flight",
+      "SkyClub access rules for Medallion members",
+      "How to redeem miles for flights"
+    ],
+    "does_not_belong": [
+      "Paying for baggage in cash"
+    ],
+    "available_examples": 955,
+    "pct_of_data": 3.65,
+    "suitable_auto_handle": true,
+    "sample_real_examples": [
+      "Never had this issue with @delta ever. Just waiting for them to add my missed miles so I can upgrade to Silver and update my cc so I can get my bonus miles.",
+      "@Delta #racialfavoritism. #1 standby list but GA clears at least 4 preferred passengers below me. This is how Delta thanks 3 year platinum and a current gold medallion on #Thanksgivingday. How is this different from involuntary bumping? Stop #inequality. Totally unacceptable.",
+      "@Delta If I cancelled a pay w/miles reservation within 24hrs, how long will it take for the skymiles to be returned to my account? Same day?",
+      "it's amazing how you fly @Delta thousands of miles one way &amp; they fly your bags in the other way. #DeltaKillingMe https://t.co/RXbA57kpyO",
+      "Oh really @delta - just as I hit book for a trip eight months away the fare magically goes up from 10,000 miles to 22,500? Something isn\u2019t right here. Pretty sure someone else didn\u2019t manage to buy it in the two minutes it took to enter my info... #unhappycustomer #delta",
+      "@Delta whoever stole my password  could they access my account to use miles/card?  Would be great to know.  2 hour wait on the phone...!",
+      "I'm no photographer but the #SeaTac @Delta #Skyclub is one of the nicest ever. I better get outta here before I say wrong things about all the Seattle wangs who are ruining it. https://t.co/AFCzHGRFps",
+      "@Delta @VirginAtlantic if I\u2019m platinum medallion flying with Virgin Atlantic codeshare today, which lounge at Heathrow Can I access? Conflicting info says I can use Virgin clubhouse..?"
+    ]
+  },
+  {
+    "intent_id": "refund_credit_voucher",
+    "intent_name": "Ticket Refund, eCredit & Voucher Request",
+    "definition": "Questions or requests regarding ticket refunds, eCredit balances, 24-hour risk-free cancellation, or flight vouchers.",
+    "belongs": [
+      "Requesting refund under 24-hour rule",
+      "How to apply eCredit to new booking",
+      "Status of processed refund"
+    ],
+    "does_not_belong": [
+      "Rebooking a delayed flight immediately at airport"
+    ],
+    "available_examples": 170,
+    "pct_of_data": 0.65,
+    "suitable_auto_handle": false,
+    "sample_real_examples": [
+      "How long does a refund due to bereavement typically take? @Delta",
+      "@Delta pay extra $ to sit with my travel companion get switch at boarding and 2 hours late. Unacceptable. I expect a refund.",
+      "Hey @Delta i had a papa johns pizza in my luggage and when I opened my bag the pizza was all over my clothing. I\u2019d like a refund right now for handling my bags so rough. Thanks.",
+      "@delta you claimed to give me a refund, processed it to a credit card I don't own, then rebooked me after confirming cancellation. Now I have to wait a week to get resolved? It's already been weeks. Great customer service.",
+      "@Delta now that you opted to provide free texting, the wifi is not useable for other things. Took 4 mins to load twitter. Awful! #canceling",
+      "@Delta    Having a refund issue. Getting the run around with no resolve. I have a case number that is no help at all.  Next move?",
+      "@DELTA Any chance delta will respond to my complaint and refund request. It's only been nearly a month. #greataftercare",
+      "@Delta Making us wait on the ground at DCA for 20m after landing because the gate \u201cisn\u2019t ready?\u201d Plenty of open spots from what I can see"
+    ]
+  },
+  {
+    "intent_id": "checkin_boarding_pass",
+    "intent_name": "Check-in & Mobile Boarding Pass Troubleshooting",
+    "definition": "Technical troubleshooting for online/app check-in, mobile boarding pass errors, or airport check-in deadlines.",
+    "belongs": [
+      "Delta app says unable to check in online",
+      "Boarding pass barcode won't load",
+      "TSA PreCheck missing from pass"
+    ],
+    "does_not_belong": [
+      "Inflight Wi-Fi issues on board"
+    ],
+    "available_examples": 806,
+    "pct_of_data": 3.08,
+    "suitable_auto_handle": true,
+    "sample_real_examples": [
+      "Srsly @116462 and @824 what gives w/ the crappy wireless? It\u2019s taking me 14 minutes &amp; counting to send an email. I paid $19 for this?",
+      "@Delta I have a flight at 7AM tomorrow - I added my KTN number, but looks like I don't have TSA Precheck - can you help?",
+      "@Delta if I am traveling with my 19yr old, how do I get her ticket added to my reservation so we are both TSA precheck?",
+      "@Delta Any idea why my boarding pass doesn't have TSA pre-check on it? It's in my Delta profile when I booked",
+      "Hey @Delta ever since the app update, twice in the past week I've been unable to add my boarding passes to apple wallet. Any solution?",
+      "@delta will not add my #tsa precheck to my ticket. After 8 hr flight and 45 mins in passport control, so excited for another hr long line!!",
+      "@Delta I just got an app notification that my bag was loaded onto the plane... uhhh.  I\u2019m not traveling today...?",
+      "@Delta seriously? another random screening tomorrow? #seatatgate #printyourboardingpass"
+    ]
+  },
+  {
+    "intent_id": "inflight_amenities_service",
+    "intent_name": "In-Flight Amenities & Onboard Experience",
+    "definition": "Questions or complaints regarding in-flight Wi-Fi, entertainment screens, onboard meals, power outlets, or crew service.",
+    "belongs": [
+      "Inflight Wi-Fi wasn't working on DL456",
+      "Special meal request options",
+      "Power outlet at seat 14B not working"
+    ],
+    "does_not_belong": [
+      "Checking flight departure time before arriving at airport"
+    ],
+    "available_examples": 409,
+    "pct_of_data": 1.56,
+    "suitable_auto_handle": true,
+    "sample_real_examples": [
+      "Flying to Seattle from Las Vegas onboard @Delta DL144. Was napping so I can go straight to work after arriving. I'm an oncology nurse.",
+      ".@Delta @212844 #sna Please manage your baggage staff. Waiting on locked up bags with baby food!",
+      "@Delta your companion pass search tool is THE WORST. Doesn't apply my pass even when I search from within the pass screen. Please fix.",
+      "@Delta I cannot add trip extras to my reservation I made this morning. Can you help? I need WiFi and mileage booster.",
+      "@Delta Loving Sky Priority!  Thank you! \ud83c\uddfa\ud83c\uddf8\ud83d\udc99",
+      "While Twitter is in its usual meltdown form, I\u2019d like to report that @Delta\u2019s WiFi streaming service is enabling me to watch the Kings game live from 35k feet!",
+      "Traveling with my 14 month old @delta &amp; have some ? about bringing his food, etc. tried calling but 2 hour wait time. Help.",
+      "Seriously impressed with @Delta's new inflight Wi-Fi. I'm steaming a video for class AND logged into the required remote desktop no prob."
+    ]
+  },
+  {
+    "intent_id": "general_complaint_feedback",
+    "intent_name": "General Service Complaint & Compliment",
+    "definition": "General positive feedback, compliments for crew members, or general non-actionable complaints about customer experience.",
+    "belongs": [
+      "Shoutout to gate agent Sarah at ATL!",
+      "Worst experience ever with Delta customer service",
+      "Praise for flight crew"
+    ],
+    "does_not_belong": [
+      "Specific request to rebook a cancelled flight"
+    ],
+    "available_examples": 9814,
+    "pct_of_data": 37.5,
+    "suitable_auto_handle": true,
+    "sample_real_examples": [
+      "Big shoutout to Michelle at @Delta for saving my Christmas break. You a real one",
+      "When your friends think poorly of your long term relationship with your airline. @Delta don\u2019t worry, you put a diamond on me, I\u2019m yours. ;) https://t.co/dza9zT7Bnz",
+      "@Delta #DL117 already has 3 hours delay. Is the #aircraft faulty?",
+      "@AmericanAir @Delta I just updated my account with my KTN. Can y\u2019all check if it updated on y\u2019alls end? \ud83d\udeeb",
+      "@Delta DL3323, DTW TO DAY, 8:10PM Fri, Nov 10, 2017 28 minutes past departure waiting on paperwork.... zero urgency.  Many would love to get home.  What gives?",
+      "Hey @Delta when someone books BC to Europe and you put them on Air France, you should tell them it's not really BC, even though you pay 4 it",
+      "Hey @Delta, I was told by bag was due in to PDX around midnight PST but no update on the tracking page. Where can I get more info?",
+      "Boarding went well. Crew so far very good on @Delta 433 #JFK #noboeingnogoing"
+    ]
+  }
+]

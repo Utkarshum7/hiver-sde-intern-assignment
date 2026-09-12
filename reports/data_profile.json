@@ -1,0 +1,197 @@
+{
+  "dataset_summary": {
+    "total_messages": 2811774,
+    "inbound_messages": 1537843,
+    "outbound_messages": 1273931,
+    "unique_authors": 702777,
+    "duplicate_tweet_ids": 0,
+    "date_range": {
+      "start": "2008-05-08 20:13:59+00:00",
+      "end": "2017-12-03 23:14:01+00:00"
+    }
+  },
+  "missing_values_by_column": {
+    "tweet_id": 0,
+    "author_id": 0,
+    "inbound": 0,
+    "created_at": 0,
+    "text": 0,
+    "response_tweet_id": 1040629,
+    "in_response_to_tweet_id": 794335
+  },
+  "message_length_stats": {
+    "characters": {
+      "min": 1,
+      "max": 513,
+      "mean": 113.89,
+      "median": 115.0,
+      "p95": 215.0
+    },
+    "words": {
+      "min": 1,
+      "max": 137,
+      "mean": 19.46,
+      "median": 19.0,
+      "p95": 38.0
+    }
+  },
+  "conversation_stats": {
+    "total_conversations": 798012,
+    "min_length": 2,
+    "max_length": 1390,
+    "mean_length": 3.52,
+    "median_length": 2.0
+  },
+  "top_brand_candidates": [
+    {
+      "brand_id": "AmazonHelp",
+      "total_messages": 373438,
+      "customer_messages": 203598,
+      "support_messages": 169840,
+      "total_conversations": 82534,
+      "two_way_conversations": 82534,
+      "avg_conversation_length": 4.53,
+      "date_coverage": "2011-10-13 to 2017-12-03"
+    },
+    {
+      "brand_id": "AppleSupport",
+      "total_messages": 238624,
+      "customer_messages": 131764,
+      "support_messages": 106860,
+      "total_conversations": 80702,
+      "two_way_conversations": 80702,
+      "avg_conversation_length": 2.96,
+      "date_coverage": "2013-05-04 to 2017-12-03"
+    },
+    {
+      "brand_id": "Uber_Support",
+      "total_messages": 128424,
+      "customer_messages": 72154,
+      "support_messages": 56270,
+      "total_conversations": 41923,
+      "two_way_conversations": 41923,
+      "avg_conversation_length": 3.07,
+      "date_coverage": "2014-05-27 to 2017-12-03"
+    },
+    {
+      "brand_id": "SpotifyCares",
+      "total_messages": 91808,
+      "customer_messages": 48543,
+      "support_messages": 43265,
+      "total_conversations": 28280,
+      "two_way_conversations": 28277,
+      "avg_conversation_length": 3.25,
+      "date_coverage": "2013-09-18 to 2017-12-03"
+    },
+    {
+      "brand_id": "Delta",
+      "total_messages": 87549,
+      "customer_messages": 45296,
+      "support_messages": 42253,
+      "total_conversations": 26166,
+      "two_way_conversations": 26164,
+      "avg_conversation_length": 3.36,
+      "date_coverage": "2012-11-27 to 2017-12-03"
+    },
+    {
+      "brand_id": "Tesco",
+      "total_messages": 72801,
+      "customer_messages": 34228,
+      "support_messages": 38573,
+      "total_conversations": 16721,
+      "two_way_conversations": 16721,
+      "avg_conversation_length": 4.38,
+      "date_coverage": "2014-09-07 to 2017-12-03"
+    },
+    {
+      "brand_id": "AmericanAir",
+      "total_messages": 86818,
+      "customer_messages": 50054,
+      "support_messages": 36764,
+      "total_conversations": 26385,
+      "two_way_conversations": 26385,
+      "avg_conversation_length": 3.32,
+      "date_coverage": "2011-06-16 to 2017-12-03"
+    },
+    {
+      "brand_id": "TMobileHelp",
+      "total_messages": 81475,
+      "customer_messages": 47158,
+      "support_messages": 34317,
+      "total_conversations": 22789,
+      "two_way_conversations": 22789,
+      "avg_conversation_length": 3.63,
+      "date_coverage": "2012-08-19 to 2017-12-03"
+    },
+    {
+      "brand_id": "comcastcares",
+      "total_messages": 72610,
+      "customer_messages": 39579,
+      "support_messages": 33031,
+      "total_conversations": 24061,
+      "two_way_conversations": 24061,
+      "avg_conversation_length": 3.04,
+      "date_coverage": "2014-07-27 to 2017-12-03"
+    },
+    {
+      "brand_id": "British_Airways",
+      "total_messages": 60548,
+      "customer_messages": 31187,
+      "support_messages": 29361,
+      "total_conversations": 16450,
+      "two_way_conversations": 16450,
+      "avg_conversation_length": 3.69,
+      "date_coverage": "2012-04-27 to 2017-12-03"
+    },
+    {
+      "brand_id": "SouthwestAir",
+      "total_messages": 64347,
+      "customer_messages": 35370,
+      "support_messages": 28977,
+      "total_conversations": 21636,
+      "two_way_conversations": 21634,
+      "avg_conversation_length": 2.99,
+      "date_coverage": "2008-05-08 to 2017-12-03"
+    },
+    {
+      "brand_id": "VirginTrains",
+      "total_messages": 65649,
+      "customer_messages": 37832,
+      "support_messages": 27817,
+      "total_conversations": 14850,
+      "two_way_conversations": 14848,
+      "avg_conversation_length": 4.43,
+      "date_coverage": "2012-03-12 to 2017-12-03"
+    },
+    {
+      "brand_id": "Ask_Spectrum",
+      "total_messages": 59112,
+      "customer_messages": 33252,
+      "support_messages": 25860,
+      "total_conversations": 18530,
+      "two_way_conversations": 18529,
+      "avg_conversation_length": 3.22,
+      "date_coverage": "2010-09-07 to 2017-12-03"
+    },
+    {
+      "brand_id": "XboxSupport",
+      "total_messages": 56952,
+      "customer_messages": 32395,
+      "support_messages": 24557,
+      "total_conversations": 13454,
+      "two_way_conversations": 13434,
+      "avg_conversation_length": 4.29,
+      "date_coverage": "2012-06-15 to 2017-12-03"
+    },
+    {
+      "brand_id": "sprintcare",
+      "total_messages": 52593,
+      "customer_messages": 30212,
+      "support_messages": 22381,
+      "total_conversations": 13555,
+      "two_way_conversations": 13555,
+      "avg_conversation_length": 3.99,
+      "date_coverage": "2011-11-28 to 2017-12-03"
+    }
+  ]
+}

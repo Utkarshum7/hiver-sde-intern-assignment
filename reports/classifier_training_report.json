@@ -1,0 +1,30 @@
+{
+  "training_examples": 20933,
+  "source_file": "data/processed/dev_corpus.parquet",
+  "label_source": "intent_heuristic (weak, single-tier keyword heuristic \u2014 see src/heuristic_intent.py)",
+  "vocabulary_size": 20000,
+  "classes": [
+    "baggage_allowance_policy",
+    "checkin_boarding_pass",
+    "flight_delay_rebooking",
+    "flight_status_inquiry",
+    "general_complaint_feedback",
+    "inflight_amenities_service",
+    "lost_damaged_baggage",
+    "refund_credit_voucher",
+    "seat_assignment_upgrade",
+    "skymiles_loyalty_program"
+  ],
+  "label_distribution": {
+    "general_complaint_feedback": 8936,
+    "flight_status_inquiry": 8350,
+    "seat_assignment_upgrade": 1185,
+    "skymiles_loyalty_program": 735,
+    "checkin_boarding_pass": 628,
+    "flight_delay_rebooking": 484,
+    "inflight_amenities_service": 304,
+    "baggage_allowance_policy": 151,
+    "refund_credit_voucher": 114,
+    "lost_damaged_baggage": 46
+  }
+}

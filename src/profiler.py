@@ -47,17 +47,13 @@ class DatasetProfiler:
         self.max_date: Optional[str] = None
         
         # Brand candidate tracking
-        # brand_name -> {inbound: int, outbound: int, authors: set, conversations: set}
         self.brand_outbound_counts = Counter()
-        self.brand_inbound_counts = Counter()
         
         # Thread & Conversation tracking
-        # parent_map: child_tweet_id -> parent_tweet_id
-        # tweet_author: tweet_id -> author_id
-        # tweet_inbound: tweet_id -> inbound (bool)
         self.parent_map: Dict[str, str] = {}
         self.tweet_author: Dict[str, str] = {}
         self.tweet_inbound: Dict[str, bool] = {}
+        self.tweet_date: Dict[str, str] = {}
 
     def process_chunk(self, chunk: pd.DataFrame):
         """Processes a single DataFrame chunk."""
@@ -88,7 +84,7 @@ class DatasetProfiler:
         self.inbound_count += int(inbound_mask.sum())
         self.outbound_count += int((~inbound_mask).sum())
         
-        # Track brands (outbound authors are support handles in twcs dataset)
+        # Track support brand outbound counts
         outbound_df = chunk[~inbound_mask]
         for brand in outbound_df["author_id"]:
             self.brand_outbound_counts[brand] += 1
@@ -99,7 +95,7 @@ class DatasetProfiler:
         self.char_lengths.extend(char_lens)
         self.word_lengths.extend(word_lens)
         
-        # Dates (if created_at present)
+        # Global date tracking
         if "created_at" in chunk.columns:
             dates = pd.to_datetime(chunk["created_at"], errors="coerce", format="mixed")
             valid_dates = dates.dropna()
@@ -116,10 +112,13 @@ class DatasetProfiler:
             tid = row["tweet_id"]
             author = row["author_id"]
             inbound = row["inbound"]
+            created_at = str(row.get("created_at", "")).strip()
             parent_id = str(row.get("in_response_to_tweet_id", "")).strip()
             
             self.tweet_author[tid] = author
             self.tweet_inbound[tid] = inbound
+            if created_at:
+                self.tweet_date[tid] = created_at
             
             if parent_id and parent_id.lower() not in ["nan", "none", "", "<na>"]:
                 self.parent_map[tid] = parent_id
@@ -185,12 +184,10 @@ class DatasetProfiler:
 
     def _reconstruct_threads(self) -> Tuple[list, list]:
         """Reconstructs threads from parent linkage graph."""
-        # Children map: parent_id -> list of child_ids
         children_map = defaultdict(list)
         for child_id, parent_id in self.parent_map.items():
             children_map[parent_id].append(child_id)
             
-        # Find root tweets (tweets that have no parent or parent is missing from dataset)
         all_tweets = set(self.tweet_author.keys())
         parent_tweet_ids = set(self.parent_map.values())
         root_candidates = (all_tweets - set(self.parent_map.keys())) | (parent_tweet_ids - all_tweets)
@@ -203,7 +200,6 @@ class DatasetProfiler:
             if root not in children_map and root not in self.tweet_author:
                 continue
             
-            # Simple BFS/DFS traversal from root to collect thread
             stack = [root]
             thread_tweets = []
             authors = set()
@@ -229,17 +225,17 @@ class DatasetProfiler:
         return threads, thread_authors
 
     def _analyze_brand_candidates(self, threads: list, thread_authors: list) -> list:
-        """Analyzes candidate support accounts / brands."""
+        """Analyzes candidate support accounts / brands with detailed metrics."""
         top_brands = [brand for brand, _ in self.brand_outbound_counts.most_common(15)]
         
         brand_stats = []
         for brand in top_brands:
-            outbound_vol = self.brand_outbound_counts[brand]
-            
-            # Count conversations involving brand
+            support_msgs = self.brand_outbound_counts[brand]
+            customer_msgs = 0
             brand_conv_count = 0
             two_way_conv_count = 0
             total_conv_len = 0
+            brand_dates = []
             
             for t_idx, authors in enumerate(thread_authors):
                 if brand in authors:
@@ -247,19 +243,44 @@ class DatasetProfiler:
                     thread = threads[t_idx]
                     total_conv_len += len(thread)
                     
-                    # Check if thread has both customer (inbound) and support (outbound brand)
-                    has_customer = any(self.tweet_inbound.get(tid, False) for tid in thread)
-                    has_brand = any(self.tweet_author.get(tid) == brand and not self.tweet_inbound.get(tid, True) for tid in thread)
+                    has_customer = False
+                    has_brand_outbound = False
                     
-                    if has_customer and has_brand:
+                    for tid in thread:
+                        is_inbound = self.tweet_inbound.get(tid, False)
+                        author = self.tweet_author.get(tid)
+                        
+                        if is_inbound:
+                            customer_msgs += 1
+                            has_customer = True
+                        elif author == brand:
+                            has_brand_outbound = True
+                            
+                        t_date = self.tweet_date.get(tid)
+                        if t_date:
+                            brand_dates.append(t_date)
+                            
+                    if has_customer and has_brand_outbound:
                         two_way_conv_count += 1
                         
+            # Format date coverage
+            date_coverage = "N/A"
+            if brand_dates:
+                b_dt = pd.to_datetime(brand_dates, errors="coerce", format="mixed").dropna()
+                if not b_dt.empty:
+                    date_coverage = f"{str(b_dt.min())[:10]} to {str(b_dt.max())[:10]}"
+                    
+            total_msgs = customer_msgs + support_msgs
+            
             brand_stats.append({
                 "brand_id": brand,
-                "outbound_support_messages": outbound_vol,
-                "total_conversations_involved": brand_conv_count,
+                "total_messages": total_msgs,
+                "customer_messages": customer_msgs,
+                "support_messages": support_msgs,
+                "total_conversations": brand_conv_count,
                 "two_way_conversations": two_way_conv_count,
-                "avg_conversation_length": round(total_conv_len / brand_conv_count, 2) if brand_conv_count > 0 else 0
+                "avg_conversation_length": round(total_conv_len / brand_conv_count, 2) if brand_conv_count > 0 else 0,
+                "date_coverage": date_coverage
             })
             
         return brand_stats

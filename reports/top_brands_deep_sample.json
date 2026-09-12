@@ -1,0 +1,1277 @@
+{
+  "AmazonHelp": {
+    "total_available_2way_conversations": 82556,
+    "sampled_conversations_analyzed": 500,
+    "resolution_breakdown": {
+      "clearly_resolved_actionable_pct": 9.2,
+      "partially_resolved_pct": 59.4,
+      "generic_low_info_dm_redirect_pct": 1.0,
+      "unresolved_discontinued_pct": 13.8,
+      "unclear_escalated_pct": 16.6
+    },
+    "key_pattern_stats": {
+      "dm_redirect_pct": 1.0,
+      "actionable_info_pct": 65.4,
+      "customer_satisfied_signal_pct": 9.2,
+      "account_specific_info_pct": 21.2,
+      "sensitive_high_risk_pct": 18.0
+    },
+    "top_customer_topic_keywords": [
+      [
+        "amazonhelp",
+        863
+      ],
+      [
+        "this",
+        173
+      ],
+      [
+        "have",
+        166
+      ],
+      [
+        "amazon",
+        160
+      ],
+      [
+        "that",
+        144
+      ],
+      [
+        "115850",
+        142
+      ],
+      [
+        "115821",
+        137
+      ],
+      [
+        "delivery",
+        117
+      ],
+      [
+        "your",
+        110
+      ],
+      [
+        "order",
+        109
+      ],
+      [
+        "with",
+        105
+      ],
+      [
+        "prime",
+        98
+      ],
+      [
+        "they",
+        89
+      ],
+      [
+        "from",
+        88
+      ],
+      [
+        "when",
+        82
+      ],
+      [
+        "delivered",
+        77
+      ],
+      [
+        "time",
+        77
+      ],
+      [
+        "today",
+        75
+      ],
+      [
+        "been",
+        69
+      ],
+      [
+        "service",
+        68
+      ]
+    ],
+    "sample_conversations_preview": [
+      {
+        "conv_id": 0,
+        "thread_len": 3,
+        "messages": [
+          {
+            "author": "251433",
+            "inbound": true,
+            "text": "@AmazonHelp I accidentally bought amazon prime but I don't want this in my life help me"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@251433 I am very sorry about the troubles with the Prime Membership, Claire! Let's see how we can help!  Can you tell me which Amazon site you order from? ^FR"
+          },
+          {
+            "author": "251433",
+            "inbound": true,
+            "text": "@AmazonHelp Jk I figured it out ty tho"
+          }
+        ]
+      },
+      {
+        "conv_id": 1,
+        "thread_len": 17,
+        "messages": [
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@115830 wheres my damn package !!!! Next day delivery my arse"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@186459 I'm sorry for the wait! What does the tracking show here: https://t.co/aaDyEz1VgE Have there been delays? Let us know! ^KN"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp @115830 @Amazonhelp\nIt's simply says OUT FOR DELIVERY.... But NOTHING"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@186459 We can still deliver up until 21:00! Please let us know if you haven't received your parcel by this time! ^KJ"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp Yea yea yea.... we'll see. \nLack of #CustomerService"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp 9PM AND STILL NOTHING FROM YOU"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@186459 When you have a moment, please phone us here: https://t.co/JzP7hlA23B to report this and discuss re-delivery. ^LB"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp Your staff are utterly incompetent and none of them know what's happening or where it is pr when it will be delivered #customerexperience"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@186459 What is showing on the order at the moment? We would be unable to give a time slot.^CD"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp They are saying massively different information from new challenge other and from what your staff say. This is ridiculous #CustomerService"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@186459 Apologies, did they ask you to wait until a certain date? ^JJ"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp No. Again, THEY KEEP CONTRADICTING EACH OTHER. I was told I would get a call for confirmation in 30 mins nearly 3hrs ago #customerexperience"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@186459 Did you get an email after contacting the agents? ^JJ"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp Nope"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@186459 Did you check your spam/junk folder? Also, has there been any update in tracking today?: https://t.co/aaDyEz1VgE ^PK"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp I have called you but NO LUCK. Awful customer service with NO ANSWERS #customerexperience"
+          },
+          {
+            "author": "186459",
+            "inbound": true,
+            "text": "@AmazonHelp Still nothing .... if this doesn't arrive it's going to cause me real issues"
+          }
+        ]
+      },
+      {
+        "conv_id": 2,
+        "thread_len": 12,
+        "messages": [
+          {
+            "author": "199871",
+            "inbound": true,
+            "text": "Se\u00f1ores de @116928 podeis ser sinceros. Lo del servicio Prime es mentira, no? Ni 24 ni 48 horas... \u00a1Un mes en recibir un producto Prime!"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@199871 Lamento esta experiencia. Recuerda que puedes reportar cualquier incidente con Servicio al Cliente. ^VL"
+          },
+          {
+            "author": "199871",
+            "inbound": true,
+            "text": "@AmazonHelp Sirve para algo? La \u00faltima vez se limitaron a pedir disculpas y no hacer nada m\u00e1s"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@199871 \u00bfPodr\u00edas indicarnos si tienes un pedido pendiente de entrega? ^VL"
+          },
+          {
+            "author": "199871",
+            "inbound": true,
+            "text": "@AmazonHelp Acabo de comprar algo y pone que tardar\u00e1 entre 16 y 30 d\u00edas. No se supone que los productos Prime son 24-48 horas?"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@199871 \u00bfEl producto es vendido y gestionado por Amazon o por un vendedor externo? ^VL"
+          },
+          {
+            "author": "199871",
+            "inbound": true,
+            "text": "@AmazonHelp Si pone \"prime\" se supone que vuestro, no?"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@199871 Alex, el env\u00edo puede variar de acuerdo con la disponibilidad del art\u00edculo, la red de distribuci\u00f3n y la direcci\u00f3n de entrega. ^DA"
+          },
+          {
+            "author": "199871",
+            "inbound": true,
+            "text": "@AmazonHelp Osea, que no garantizais la entrega en 24-48 horas a quienes no est\u00e9n en capitales, como este ejemplo https://t.co/UmT2hCXHeu"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@199871 2/2 Respecto a tu pedido, contacta al SAC para que puedan informarte m\u00e1s sobre tu entrega: https://t.co/OjvUxwnzPe. ^DA"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@199871 Por motivo de seguridad, sugiero no compartir informaci\u00f3n personal ni sensible de tu cuenta o pedido por este medio. 1/2"
+          },
+          {
+            "author": "199871",
+            "inbound": true,
+            "text": "@AmazonHelp Acabo de borrarlo. Igualmente, el SAC nunca me ha dado una soluci\u00f3n respecto a este tema. Simplemente dejar\u00e9 de usar este servicio"
+          }
+        ]
+      },
+      {
+        "conv_id": 3,
+        "thread_len": 22,
+        "messages": [
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@115850 @115821 Ordered a speaker but received a Data Cable &amp; Headphone, this is how Amazon Cheats a Customer, never expected this. #Cheat"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@115850 @115821 Never expected that online people cheat like this to Customers, trusted @115850  but not now @115851 hope this reaches to you. #Cheat"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 Sorry for the trouble. Kindly report this to our support team here: https://t.co/vlvfJr4nN9 and we'll check this. ^HN"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp I want the refund right now!  @115851 your call center guys are telling 5 days. While deducting money it would take 5 seconds.Huh #Cheat"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 Sorry for the hassle. Please share your details here: https://t.co/GIJyeYqKE0 and I'll get back to you. ^HN"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp Hi Team,did not receive complete refund. Is this how you cheat a customer. Pls call back. @115821 @AmazonHelp @115850 @123644 @115851"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 Sorry about the refund problem. Please report this to our support team here: https://t.co/vlvfJr4nN9. ^HA"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp Please arrange a call back on my mobile"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 You may request for a call back from our support team here: https://t.co/TK4yevTaND. ^SQ"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp Can you please arrange it."
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 We don't have an option to contact you. You may get in touch with our support team here: https://t.co/rS49hgaADF ^AK"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp How is this possible..i gave you my number..and you cant arrange a callback @115851 is this how amazon treats customer #fedup"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 We've not received your details yet, kindly fill in your details here https://t.co/beaaDm0muc and I\u2019ll contact you soon.^AH"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp Updated the details in the link still didn't get call. Horrifying service. @115851"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 Our team is already looking into this for you. Kindly wait until we reach out. Thanks! ^SU"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp 24 hours team..how much time do you require for a call back @115851"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 We've sent a correspondence to your registered account, request you to check. ^MA"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp I didn't receive anything..boss what's your problem in arranging a call back. I have raised a request in your given link . @115851"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 We've sent you a correspondence here: https://t.co/ubzNHWZvL2 If you concern is still unaddressed, (1/2)"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 you may revert to the same and we'll connect with you. ^SG(2/2)"
+          },
+          {
+            "author": "330228",
+            "inbound": true,
+            "text": "@AmazonHelp What to revert when I didn't receive anything..are getting crazy \ud83d\ude44\ud83d\ude0f"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@330228 We've sent a correspondence to your registered account. Kindly check it, here: https://t.co/8DAc10S7ww ^MA"
+          }
+        ]
+      },
+      {
+        "conv_id": 4,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "331923",
+            "inbound": true,
+            "text": "@AmazonHelp @174208  I have no problem getting my orders when its 2 day shipping but when it comes to same day I never get my packages @174208, and lasership always says delivered!! @AmazonHelp I seriously think ur 3rd party is stealing packages\ud83d\ude12\ud83d\ude12\ud83d\ude12"
+          },
+          {
+            "author": "AmazonHelp",
+            "inbound": false,
+            "text": "@331923 I'm sorry for the poor experience. Are you having trouble with a recent order? Have you contacted us to provide carrier feedback: https://t.co/hApLpMlfHN? ^KB"
+          }
+        ]
+      }
+    ]
+  },
+  "AppleSupport": {
+    "total_available_2way_conversations": 80717,
+    "sampled_conversations_analyzed": 500,
+    "resolution_breakdown": {
+      "clearly_resolved_actionable_pct": 10.8,
+      "partially_resolved_pct": 21.4,
+      "generic_low_info_dm_redirect_pct": 63.2,
+      "unresolved_discontinued_pct": 3.2,
+      "unclear_escalated_pct": 1.4
+    },
+    "key_pattern_stats": {
+      "dm_redirect_pct": 68.0,
+      "actionable_info_pct": 92.8,
+      "customer_satisfied_signal_pct": 10.8,
+      "account_specific_info_pct": 49.4,
+      "sensitive_high_risk_pct": 6.6
+    },
+    "top_customer_topic_keywords": [
+      [
+        "applesupport",
+        620
+      ],
+      [
+        "115858",
+        233
+      ],
+      [
+        "this",
+        190
+      ],
+      [
+        "phone",
+        142
+      ],
+      [
+        "iphone",
+        131
+      ],
+      [
+        "update",
+        98
+      ],
+      [
+        "that",
+        91
+      ],
+      [
+        "with",
+        89
+      ],
+      [
+        "when",
+        78
+      ],
+      [
+        "have",
+        70
+      ],
+      [
+        "battery",
+        65
+      ],
+      [
+        "just",
+        59
+      ],
+      [
+        "please",
+        52
+      ],
+      [
+        "your",
+        49
+      ],
+      [
+        "what",
+        49
+      ],
+      [
+        "it\u2019s",
+        49
+      ],
+      [
+        "from",
+        47
+      ],
+      [
+        "help",
+        47
+      ],
+      [
+        "apple",
+        47
+      ],
+      [
+        "like",
+        46
+      ]
+    ],
+    "sample_conversations_preview": [
+      {
+        "conv_id": 0,
+        "thread_len": 3,
+        "messages": [
+          {
+            "author": "670885",
+            "inbound": true,
+            "text": "I\ufe0f can\u2019t believe @115858 still haven\u2019t fixed the issue with the the letter I\ud83d\ude44"
+          },
+          {
+            "author": "AppleSupport",
+            "inbound": false,
+            "text": "@670885 You should be able to resolve the issue by backing up, then updating to iOS 11.1.1 as shown on our page here: https://t.co/xXaXeeSRt9 Let us know in DM if you continue to experience this issue. https://t.co/GDrqU22YpT"
+          },
+          {
+            "author": "670885",
+            "inbound": true,
+            "text": "@AppleSupport Thank you so much. I apologize, I didn\u2019t realize that there was a new update available."
+          }
+        ]
+      },
+      {
+        "conv_id": 1,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "710696",
+            "inbound": true,
+            "text": "WHY IS MY PHONE FUCKING UP RN @AppleSupport EXPLAIN"
+          },
+          {
+            "author": "AppleSupport",
+            "inbound": false,
+            "text": "@710696 Let's get your iPhone back into top shape. What kind of issues are you seeing? Let us know in DM to take a closer look into this. https://t.co/GDrqU22YpT"
+          }
+        ]
+      },
+      {
+        "conv_id": 2,
+        "thread_len": 6,
+        "messages": [
+          {
+            "author": "229939",
+            "inbound": true,
+            "text": "Sort your shite batteries out @AppleSupport been a joke since two updates ago! 20% in 2 mins? #pisstake #payenough #bringbacknokia \ud83e\udd2c\ud83e\udd2c\ud83e\udd2c"
+          },
+          {
+            "author": "229940",
+            "inbound": true,
+            "text": "@229939 @AppleSupport What u got?"
+          },
+          {
+            "author": "229939",
+            "inbound": true,
+            "text": "@229940 @AppleSupport 6S proper gone downhill the last few weeks \ud83d\udc4e\ud83c\udffc"
+          },
+          {
+            "author": "229940",
+            "inbound": true,
+            "text": "@229939 @AppleSupport Just been to someone\u2019s house in Kesgrave. New battery as went from 100% to 1% in 2 hours and camera was knackered. \u00a379."
+          },
+          {
+            "author": "AppleSupport",
+            "inbound": false,
+            "text": "@229940 We understand how important battery life is for your device. Let us help. DM us and tell us which version of iOS you're running. Find that under Settings &gt; General &gt; About. https://t.co/GDrqU22YpT"
+          },
+          {
+            "author": "AppleSupport",
+            "inbound": false,
+            "text": "@229939 Great battery life is important to get you and your iPhone through your day. So we can get a closer look at this, could you join us in DM and we'll get started? https://t.co/GDrqU22YpT"
+          }
+        ]
+      },
+      {
+        "conv_id": 3,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "461863",
+            "inbound": true,
+            "text": "@AppleSupport hello plz help why do I keep seeing the question mark in a box with the letter A??"
+          },
+          {
+            "author": "AppleSupport",
+            "inbound": false,
+            "text": "@461863 We're here to help. Please DM us which iOS software version you are using and we'll go from there. https://t.co/GDrqU22YpT"
+          }
+        ]
+      },
+      {
+        "conv_id": 4,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "579164",
+            "inbound": true,
+            "text": "@115858 you guys seriously turned a great product, into a piece of shit. This update continues to suck, my iPhone 6 is now garbage."
+          },
+          {
+            "author": "AppleSupport",
+            "inbound": false,
+            "text": "@579164 We want to make sure you enjoy your Apple products. DM us details of the issue you're experiencing &amp; we'll be happy to help. https://t.co/GDrqU22YpT"
+          }
+        ]
+      }
+    ]
+  },
+  "Uber_Support": {
+    "total_available_2way_conversations": 41923,
+    "sampled_conversations_analyzed": 500,
+    "resolution_breakdown": {
+      "clearly_resolved_actionable_pct": 8.8,
+      "partially_resolved_pct": 45.4,
+      "generic_low_info_dm_redirect_pct": 38.4,
+      "unresolved_discontinued_pct": 5.0,
+      "unclear_escalated_pct": 2.4
+    },
+    "key_pattern_stats": {
+      "dm_redirect_pct": 41.2,
+      "actionable_info_pct": 66.0,
+      "customer_satisfied_signal_pct": 9.6,
+      "account_specific_info_pct": 24.2,
+      "sensitive_high_risk_pct": 47.4
+    },
+    "top_customer_topic_keywords": [
+      [
+        "uber_support",
+        514
+      ],
+      [
+        "115873",
+        255
+      ],
+      [
+        "this",
+        167
+      ],
+      [
+        "uber",
+        156
+      ],
+      [
+        "driver",
+        147
+      ],
+      [
+        "your",
+        135
+      ],
+      [
+        "have",
+        124
+      ],
+      [
+        "that",
+        112
+      ],
+      [
+        "with",
+        105
+      ],
+      [
+        "115877",
+        76
+      ],
+      [
+        "help",
+        72
+      ],
+      [
+        "drivers",
+        72
+      ],
+      [
+        "ride",
+        71
+      ],
+      [
+        "please",
+        66
+      ],
+      [
+        "just",
+        61
+      ],
+      [
+        "account",
+        61
+      ],
+      [
+        "from",
+        57
+      ],
+      [
+        "charged",
+        53
+      ],
+      [
+        "trip",
+        50
+      ],
+      [
+        "what",
+        50
+      ]
+    ],
+    "sample_conversations_preview": [
+      {
+        "conv_id": 0,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "392138",
+            "inbound": true,
+            "text": "@115873 how do I fix a driver rating using the mobile app?  I put down the wrong rating but can't see how to reset or fix.  Thanks!"
+          },
+          {
+            "author": "Uber_Support",
+            "inbound": false,
+            "text": "@392138 Hi, Dave. Please see https://t.co/nck74BcJ2m for more information on changing ratings. Hope this helps!"
+          }
+        ]
+      },
+      {
+        "conv_id": 1,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "234651",
+            "inbound": true,
+            "text": "I am done with @115873 !!! Ah! Your damn driver got his car clamped so he canceled the trip and you\u2019re charging me!? What kind of shitty operation are you running?"
+          },
+          {
+            "author": "Uber_Support",
+            "inbound": false,
+            "text": "@234651 Here to help! Send us a note via https://t.co/QsI1vsvcif to assist you further."
+          }
+        ]
+      },
+      {
+        "conv_id": 2,
+        "thread_len": 5,
+        "messages": [
+          {
+            "author": "389545",
+            "inbound": true,
+            "text": "I see @Uber_Support responding to tweets but not my dm... #annoyed"
+          },
+          {
+            "author": "Uber_Support",
+            "inbound": false,
+            "text": "@389545 Let's take a closer look! Send us a note via https://t.co/lqVgKo4ZO3 so our team can follow up."
+          },
+          {
+            "author": "389545",
+            "inbound": true,
+            "text": "@Uber_Support How long does it usually take to get a response after I\u2019ve submitted the note?"
+          },
+          {
+            "author": "Uber_Support",
+            "inbound": false,
+            "text": "@389545 Happy to help! Our team is currently reviewing your email and will follow up directly."
+          },
+          {
+            "author": "389545",
+            "inbound": true,
+            "text": "@Uber_Support Thank you"
+          }
+        ]
+      },
+      {
+        "conv_id": 3,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "805572",
+            "inbound": true,
+            "text": "@Uber_Support please let me know if you have seen my message. I did not take this trip. Please refund this trip to me for the details in the message."
+          },
+          {
+            "author": "Uber_Support",
+            "inbound": false,
+            "text": "@805572 We've escalated this inquiry to the appropriate team and they will be responding shortly via in-app/email support. We appreciate your patience."
+          }
+        ]
+      },
+      {
+        "conv_id": 4,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "308453",
+            "inbound": true,
+            "text": "@115873 overcharging me from the last 3 rides,estimated fare different from actual fare,no replies for complaints #bluff company"
+          },
+          {
+            "author": "Uber_Support",
+            "inbound": false,
+            "text": "@308453 Sorry to hear about that, Barkha! Send us a DM with your email address so we can follow up."
+          }
+        ]
+      }
+    ]
+  },
+  "SpotifyCares": {
+    "total_available_2way_conversations": 28277,
+    "sampled_conversations_analyzed": 500,
+    "resolution_breakdown": {
+      "clearly_resolved_actionable_pct": 12.2,
+      "partially_resolved_pct": 28.6,
+      "generic_low_info_dm_redirect_pct": 40.6,
+      "unresolved_discontinued_pct": 13.8,
+      "unclear_escalated_pct": 4.8
+    },
+    "key_pattern_stats": {
+      "dm_redirect_pct": 42.4,
+      "actionable_info_pct": 69.2,
+      "customer_satisfied_signal_pct": 12.8,
+      "account_specific_info_pct": 28.8,
+      "sensitive_high_risk_pct": 12.0
+    },
+    "top_customer_topic_keywords": [
+      [
+        "spotifycares",
+        557
+      ],
+      [
+        "115888",
+        271
+      ],
+      [
+        "spotify",
+        165
+      ],
+      [
+        "this",
+        123
+      ],
+      [
+        "have",
+        112
+      ],
+      [
+        "account",
+        95
+      ],
+      [
+        "with",
+        88
+      ],
+      [
+        "premium",
+        85
+      ],
+      [
+        "help",
+        85
+      ],
+      [
+        "that",
+        84
+      ],
+      [
+        "just",
+        79
+      ],
+      [
+        "when",
+        76
+      ],
+      [
+        "songs",
+        65
+      ],
+      [
+        "your",
+        64
+      ],
+      [
+        "from",
+        63
+      ],
+      [
+        "please",
+        58
+      ],
+      [
+        "music",
+        57
+      ],
+      [
+        "thanks",
+        55
+      ],
+      [
+        "song",
+        52
+      ],
+      [
+        "there",
+        46
+      ]
+    ],
+    "sample_conversations_preview": [
+      {
+        "conv_id": 0,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "536431",
+            "inbound": true,
+            "text": "@SpotifyCares Trying to add my wife(__email__) to Familiar Plan(__email__): \"600 - Oops something went wrong\"."
+          },
+          {
+            "author": "SpotifyCares",
+            "inbound": false,
+            "text": "@536431 Hey there! We'd suggest deleting your previous tweet as it contains your private info. Can you DM it to us instead? /GU https://t.co/ldFdZRiNAt"
+          }
+        ]
+      },
+      {
+        "conv_id": 1,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "381945",
+            "inbound": true,
+            "text": "@115888 I've 'thumbs downed' about 25 Modest Mouse songs since downloading your app yet they continue to show up.. What gives"
+          },
+          {
+            "author": "SpotifyCares",
+            "inbound": false,
+            "text": "@381945 Hey David! Thanks for the feedback. We'll be sure to pass it on to the right folks /RA"
+          }
+        ]
+      },
+      {
+        "conv_id": 2,
+        "thread_len": 4,
+        "messages": [
+          {
+            "author": "170132",
+            "inbound": true,
+            "text": "Still can\u2019t access my @115888 account as someone has hacked it. If my playlists have gone I\u2019ll be devastated \ud83d\ude22"
+          },
+          {
+            "author": "SpotifyCares",
+            "inbound": false,
+            "text": "@170132 Hey! Just to clarify, were you able to get help at https://t.co/EQsHGd5NCy? /AR"
+          },
+          {
+            "author": "170132",
+            "inbound": true,
+            "text": "@SpotifyCares Yeah I\u2019m back in :) thanks!"
+          },
+          {
+            "author": "SpotifyCares",
+            "inbound": false,
+            "text": "@170132 You're welcome! Let us know if you ever need us again. We'd be... https://t.co/LgAM6ky9Vv /AN"
+          }
+        ]
+      },
+      {
+        "conv_id": 3,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "294527",
+            "inbound": true,
+            "text": "@SpotifyCares My premium ran out yesterday and now it's logged me out of my app without my knowledge and is refusing to log me back in \ud83d\ude27"
+          },
+          {
+            "author": "SpotifyCares",
+            "inbound": false,
+            "text": "@294527 Hey there! Could you send us a DM with your account's email address? We'll take a look backstage /FR https://t.co/ldFdZRiNAt"
+          }
+        ]
+      },
+      {
+        "conv_id": 4,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "220664",
+            "inbound": true,
+            "text": "@SpotifyCares @115888 https://t.co/1BWGITGNOa wrong artist link. Should be https://t.co/cXTvq9P3o6"
+          },
+          {
+            "author": "SpotifyCares",
+            "inbound": false,
+            "text": "@220664 Thanks for the heads-up! We'll pass this on to the right team. You're awesome \ud83d\ude42 /NH"
+          }
+        ]
+      }
+    ]
+  },
+  "Delta": {
+    "total_available_2way_conversations": 26166,
+    "sampled_conversations_analyzed": 500,
+    "resolution_breakdown": {
+      "clearly_resolved_actionable_pct": 20.4,
+      "partially_resolved_pct": 6.2,
+      "generic_low_info_dm_redirect_pct": 21.8,
+      "unresolved_discontinued_pct": 34.2,
+      "unclear_escalated_pct": 17.4
+    },
+    "key_pattern_stats": {
+      "dm_redirect_pct": 23.8,
+      "actionable_info_pct": 25.8,
+      "customer_satisfied_signal_pct": 21.6,
+      "account_specific_info_pct": 7.2,
+      "sensitive_high_risk_pct": 44.8
+    },
+    "top_customer_topic_keywords": [
+      [
+        "delta",
+        881
+      ],
+      [
+        "flight",
+        210
+      ],
+      [
+        "this",
+        113
+      ],
+      [
+        "your",
+        103
+      ],
+      [
+        "with",
+        102
+      ],
+      [
+        "that",
+        96
+      ],
+      [
+        "have",
+        94
+      ],
+      [
+        "thanks",
+        70
+      ],
+      [
+        "from",
+        69
+      ],
+      [
+        "just",
+        60
+      ],
+      [
+        "when",
+        59
+      ],
+      [
+        "time",
+        55
+      ],
+      [
+        "thank",
+        49
+      ],
+      [
+        "gate",
+        48
+      ],
+      [
+        "help",
+        45
+      ],
+      [
+        "service",
+        42
+      ],
+      [
+        "seat",
+        42
+      ],
+      [
+        "they",
+        41
+      ],
+      [
+        "there",
+        39
+      ],
+      [
+        "been",
+        38
+      ]
+    ],
+    "sample_conversations_preview": [
+      {
+        "conv_id": 0,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "675133",
+            "inbound": true,
+            "text": "@delta I accidentally booked a flight for my wife using her maiden name, how can i fix this?"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@675133 Let us assist. Please DM us her confirmation number via this link.  *ALA https://t.co/6iDGBJRMTU"
+          }
+        ]
+      },
+      {
+        "conv_id": 1,
+        "thread_len": 13,
+        "messages": [
+          {
+            "author": "316627",
+            "inbound": true,
+            "text": "@824 agent said my checked bag would get on earlier flight, so I paid $75 to change. Bag didn\u2019t make it. Can you refund my $75?"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 Hello, Clark. I'm very sorry your bag didn't make the earlier flight this evening. We can't guarantee your bag will travel on an... 1/2"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 ...earlier flight. I'm unable to refund the fee that you have paid as you traveled on the earlier flight.  *HDG 2/2"
+          },
+          {
+            "author": "316627",
+            "inbound": true,
+            "text": "@Delta I figured. Customer service is basically dead. But you do understand there was zero point in taking the earlier flight w/o my bag, right?"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 I understand. Getting on an earlier flight is a voluntary separation from your luggage, meaning it may or may not get on the flight... 1/2"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 ...with you, which is typically explained to passengers before they agree to an earlier flight.  *ABN 2/2"
+          },
+          {
+            "author": "316627",
+            "inbound": true,
+            "text": "@Delta Agreed. Just saying there\u2019s discretion to refund a charge for which I received no value. Just b/c you don\u2019t have to doesn\u2019t mean you can\u2019t."
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 You paid to get on an earlier flight, which you did. That's why the fee can't be refunded to you. Paying the fee isn't contingent... 1/2"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 ...upon your luggage making the flight, it's contingent upon you getting on an earlier flight. *ABN 2/2"
+          },
+          {
+            "author": "316627",
+            "inbound": true,
+            "text": "@Delta I do understand the policy, thanks. And, more importantly, the company ethic. That will certainly come in handy in future travel-planning."
+          },
+          {
+            "author": "316627",
+            "inbound": true,
+            "text": "@Delta In fairness, I do have to say that every Delta e/e we dealt with was delightful-esp the flight crew. So you\u2019ve got that going for you..."
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 We appreciate the kudos! *ABN"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@316627 Thank you for reaching out to us. Enjoy your evening. *ABN"
+          }
+        ]
+      },
+      {
+        "conv_id": 2,
+        "thread_len": 2,
+        "messages": [
+          {
+            "author": "173811",
+            "inbound": true,
+            "text": "@Delta Thank U 2 BRIDGETTE at the SkyClub A17 in @122828 for the POSITIVE attitude n hard work, n most of all, the Smile! #itsagoodday \ud83d\ude03"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@173811 @122828 Way to go Bridgette! Thanks so much for the shout out Scott! We truly appreciate your loyalty! #KeepClimbing *HKM"
+          }
+        ]
+      },
+      {
+        "conv_id": 3,
+        "thread_len": 4,
+        "messages": [
+          {
+            "author": "279765",
+            "inbound": true,
+            "text": "@Delta I bought my wife a ticket next week to come to Denver with me using miles. Now I can upgrade my seat to first class with $ but I can't do the same for her. Any options to get us both in first class still?"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@279765 Hello Joe, your wife just tweeted the same request and I'm more than happy to help if you provide a phone number via DM for me to call to assist. *TDL https://t.co/6iDGBJAc2m"
+          },
+          {
+            "author": "279765",
+            "inbound": true,
+            "text": "@Delta Can we call Delta tomorrow or follow up then? We have a long drive to see family and would be happy to sort it out then!"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@279765 Absolutely! Happy holidays! *TDL"
+          }
+        ]
+      },
+      {
+        "conv_id": 4,
+        "thread_len": 6,
+        "messages": [
+          {
+            "author": "680193",
+            "inbound": true,
+            "text": "@Delta \u201cquick fix\u201d to a partially boarded plane. The 35 min delay is about the exact amount of time needed to cause me to miss my connection. \ud83e\udd14 not good for me I guess"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@680193 Hi Stephen, I do apologize for the delays. Please forward your confirmation#. *AMS"
+          },
+          {
+            "author": "680193",
+            "inbound": true,
+            "text": "@Delta GG8OAT"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@680193 I show you will still make your connection. *AMS"
+          },
+          {
+            "author": "680193",
+            "inbound": true,
+            "text": "@Delta Good news thank you!"
+          },
+          {
+            "author": "Delta",
+            "inbound": false,
+            "text": "@680193 You are very welcome! *AMS"
+          }
+        ]
+      }
+    ]
+  }
+}

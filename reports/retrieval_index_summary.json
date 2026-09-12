@@ -1,0 +1,17 @@
+{
+  "total_conversations": 26168,
+  "dev_split_count": 20934,
+  "dev_split_pct": 80.0,
+  "dev_retrieval_eligible_count": 20913,
+  "reserved_golden_pool_count": 5234,
+  "reserved_golden_pool_pct": 20.0,
+  "reserved_retrieval_eligible_count": 5229,
+  "retrieval_method": "TF-IDF Vectorizer + Cosine Similarity",
+  "vectorizer_max_features": 25000,
+  "ngram_range": [
+    1,
+    2
+  ],
+  "index_file_size_mb": 12.42,
+  "random_seed": 42
+}

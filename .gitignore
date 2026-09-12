@@ -27,14 +27,23 @@ env/
 ENV/
 
 # Data & Datasets (Raw and Processed)
+# Raw Kaggle dataset (~500MB) and derived processed artifacts are regenerable
+# from scripts + raw data, so they are excluded to keep the repo small.
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
-*.csv
 *.zip
 *.tar.gz
 *.parquet
+
+# Generic CSV exclusion, EXCEPT:
+#  - the golden evaluation set (hand-labelled deliverable, irreplaceable)
+#  - the human reply-quality rating sheet (real human ratings, irreplaceable
+#    once filled in — see scripts/build_human_rating_sheet.py)
+*.csv
+!data/golden_eval/*.csv
+!data/eval/*.csv
 
 # Credentials & Environment Variables
 .env

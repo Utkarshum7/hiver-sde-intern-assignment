@@ -1,0 +1,162 @@
+{
+  "R001": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R002": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R003": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R004": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R005": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R006": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R007": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R008": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R009": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R010": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R011": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R012": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R013": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R014": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R015": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R016": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R017": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R018": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R019": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  },
+  "R020": {
+    "status": "pending_no_api_key",
+    "rubric_version": "delta_reply_judge_v1",
+    "model_id": "claude-sonnet-5",
+    "scores": null,
+    "aggregate": null,
+    "note": "ANTHROPIC_API_KEY not set. No judge score was computed or fabricated."
+  }
+}
