@@ -113,12 +113,31 @@ def test_deploy_requirements_is_a_true_subset_of_main_requirements():
 
 
 def test_deploy_requirements_excludes_data_prep_and_dev_only_packages():
+    """kaggle/tqdm/pytest/anthropic are genuinely unused by the demo
+    server's runtime code path. pyarrow is deliberately NOT in this list —
+    see test_deploy_requirements_includes_pyarrow below for why it must be
+    present despite not being imported directly anywhere in src/ or
+    scripts/demo_server.py."""
     deploy_pkgs = _package_names(_read(DEPLOY_REQUIREMENTS_PATH))
-    for excluded in ("pyarrow", "kaggle", "tqdm", "pytest", "anthropic"):
+    for excluded in ("kaggle", "tqdm", "pytest", "anthropic"):
         assert excluded not in deploy_pkgs, (
             f"{excluded!r} is not imported by the demo server's runtime "
             "code path and should not be in the deployment-only requirements"
         )
+
+
+def test_deploy_requirements_includes_pyarrow():
+    """pyarrow is NOT imported directly anywhere in the demo server's code
+    path, but IS required at runtime: pandas 3.x backs its string columns
+    with pyarrow-backed StringDtype whenever pyarrow is installed, so
+    unpickling retrieval_index.pkl's corpus_df needs pyarrow importable
+    even though nothing in src/ or scripts/demo_server.py calls it
+    explicitly. Reproduced on Render (ModuleNotFoundError: No module named
+    'pyarrow' during joblib.load) and locally in an isolated venv built
+    from requirements-deploy.txt without this line — this is a real,
+    confirmed dependency, not a guess."""
+    deploy_pkgs = _package_names(_read(DEPLOY_REQUIREMENTS_PATH))
+    assert "pyarrow" in deploy_pkgs
 
 
 def test_main_requirements_file_unchanged_in_spirit():
