@@ -11,6 +11,28 @@ setup, reproduction, architecture, and where things live.
 
 ---
 
+## Live Demo
+
+**[https://delta-support-intelligence-demo.onrender.com](https://delta-support-intelligence-demo.onrender.com)**
+
+Hosted on Render's free tier, built from this repository's
+[`deploy/render-demo`](https://github.com/Utkarshum7/hiver-sde-intern-assignment/tree/deploy/render-demo)
+branch — same 5-field agent contract (`intent`, `reply`, `escalate`,
+`escalation_reason`, `evidence`) as the local demo below, running fully
+offline against the same classifier/retrieval artifacts described in this
+README (no live Delta system access, no LLM API calls). Free-tier services
+sleep after ~15 minutes of inactivity, so the first request after a quiet
+period can take up to ~1 minute to wake up — the UI shows a notice about
+this. See ["Deploying to Render"](#deploying-to-render) below for how it's
+configured, and
+[`data/processed/DEPLOYMENT_ARTIFACT_NOTE.md`](data/processed/DEPLOYMENT_ARTIFACT_NOTE.md)
+for the narrow, display-only text redaction applied to the deployed copy
+of the retrieval evidence (phone numbers / claim-reference codes only —
+does not affect classification, ranking, or any locked evaluation metric
+below).
+
+---
+
 ## Project Status (real, as of this writing)
 
 * **Brand:** `@Delta` — 26,168 reconstructed conversation threads (87,994 messages)
@@ -217,6 +239,86 @@ facts, or an escalation notice explaining why a human is needed.
 
 ---
 
+## Deploying to Render
+
+The demo server ([scripts/demo_server.py](scripts/demo_server.py)) can be
+deployed as a persistent Python web service on [Render](https://render.com)
+using the included [`render.yaml`](render.yaml). This section covers only
+the demo — it has no relationship to, and no effect on, the evaluation
+pipeline, golden dataset, or measured results (§ below).
+
+**Required model artifacts.** The demo needs exactly two small, derived
+files to run — `data/processed/intent_classifier.pkl` (~2.3 MB) and
+`data/processed/retrieval_index.pkl` (~12.4 MB), together ~15 MB. These are
+normally gitignored (regenerable via `scripts/train_classifier.py` /
+`scripts/build_retrieval_index.py`), but `.gitignore` carries a narrow,
+explicit exception for exactly these two filenames so a host that builds
+from this repository has them available. They contain only a fitted TF-IDF
+vectorizer/classifier and the already-public dev-corpus evidence text (no
+secrets, no held-out/golden data — independently re-verified: zero overlap
+between the indexed conversation IDs and the reserved/golden pool).
+
+`retrieval_index.pkl` additionally has a narrow, display-only redaction
+applied (`scripts/prepare_deployment_artifacts.py`): a small number of
+phone-number- and claim-reference-shaped substrings in the evidence text
+are replaced with a placeholder, while Delta's own repeated public support
+numbers are left as-is. **The TF-IDF vectorizer and matrix that drive
+retrieval ranking are fitted before this step and are completely
+unaffected by it** — see `data/processed/DEPLOYMENT_ARTIFACT_NOTE.md`
+(generated alongside the artifact) for the full disclosure, including
+exactly what did and didn't change and why the locked evaluation results
+are unaffected.
+
+**Steps:**
+1. Push this repository to GitHub (already done) with the two `.pkl`
+   artifacts committed (see above).
+2. In the Render dashboard: New → Blueprint → select this repo. Render
+   reads `render.yaml` automatically and provisions one free-tier Python
+   web service from it.
+3. Render builds with `pip install -r requirements-deploy.txt` — a
+   **deployment-only** dependency list (see "Dependencies for deployment"
+   below) — and starts it with
+   `uvicorn scripts.demo_server:app --host 0.0.0.0 --port $PORT`.
+4. Render provides the `$PORT` environment variable automatically; nothing
+   needs to be configured for it manually. Do not hardcode a port — the
+   start command in `render.yaml` already reads `$PORT` at runtime.
+5. Once deployed, Render gives you a free `https://<service-name>.onrender.com`
+   URL automatically — no separate TLS/domain setup needed.
+
+**No secrets required.** The service declares no API keys or credentials.
+`ANTHROPIC_API_KEY` is never referenced by `render.yaml` and isn't needed —
+the demo's reply generation is fully offline and deterministic.
+
+**Expected cold-start behavior.** Render's free tier puts web services to
+sleep after ~15 minutes of inactivity. The next visitor triggers a cold
+start: Render re-launches the container (roughly 30-60s), and then the
+app's own model/index load adds its usual ~17s on top — so the *first*
+request after a quiet period can take up to roughly a minute before
+responding, even though the service is healthy and will keep responding
+quickly after that. The UI shows a small, permanent notice about this
+("Hosted demo may take a moment to wake up after inactivity.") so a first
+visitor doesn't mistake the wait for a broken deployment.
+
+**Dependencies for deployment.** `requirements.txt` (used for local dev,
+data preparation, and the test suite) is unchanged — removing packages
+from it isn't safe to do without proving every existing workflow still
+works (e.g. `pyarrow` for parquet I/O in `scripts/build_delta_dataset.py`,
+`kaggle` for dataset download, `tqdm` for build-script progress bars,
+`pytest` for the test suite). Instead, [`requirements-deploy.txt`](requirements-deploy.txt)
+is a separate, deployment-only file containing just the packages the demo
+server's code actually imports at request time — traced directly from
+`scripts/demo_server.py`'s import graph (`pandas`, `numpy`, `scikit-learn`,
+`scipy`, `joblib`, `fastapi`, `uvicorn`). This keeps the deployed
+install smaller/faster without touching the file every other workflow
+depends on.
+
+**Running locally** is unchanged from the "Local Demo" section above —
+`python -m uvicorn scripts.demo_server:app --host 127.0.0.1 --port 8000`
+still works exactly as before; `render.yaml` only affects what happens on
+Render, not local usage.
+
+---
+
 ## Reproduction — Golden-Set Annotation (complete; commands kept for reference/audit)
 
 ```powershell
@@ -299,11 +401,59 @@ escalation recall and the quantified regex-coverage gap in
 ## Project Documentation
 
 * [REPORT.md](REPORT.md) — executive summary + full evidence appendix (problem framing, architecture, evaluation methodology, real results, failure analysis, "what's misleading about my headline number," limitations, one-more-week plan)
+* [docs/evaluation_report.md](docs/evaluation_report.md) — the same report content, reorganized under the assignment's exact requested section headings, for quick reviewer cross-checking
 * [docs/requirements_checklist.md](docs/requirements_checklist.md) — final adversarial review, requirement-by-requirement, PASS/PENDING/FAIL with evidence
-* [docs/decision_log.md](docs/decision_log.md) — non-obvious engineering decisions and why
+* [docs/decision_log.md](docs/decision_log.md) — 14 non-obvious engineering decisions, each with alternatives considered, reason, and trade-off
 * [docs/intent_taxonomy.md](docs/intent_taxonomy.md) — intent definitions, real examples, capability boundaries
 * [docs/escalation_policy.md](docs/escalation_policy.md) — escalation decision matrix
 * [docs/retrieval_design.md](docs/retrieval_design.md) — retrieval evidence design & leakage prevention
 * [docs/brand_selection.md](docs/brand_selection.md) — brand candidate empirical analysis
 * [docs/golden_set_methodology.md](docs/golden_set_methodology.md) — sampling & annotation methodology
 * [docs/golden_annotation_guide.md](docs/golden_annotation_guide.md) — annotator instructions
+
+---
+
+## Citations & References
+
+**Dataset.** Kaggle, *Customer Support on Twitter*
+(`thoughtvector/customer-support-on-twitter`), 2,811,774 tweets, 516.5 MB —
+[kaggle.com/datasets/thoughtvector/customer-support-on-twitter](https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter).
+Used for all `@Delta` conversation reconstruction, retrieval evidence, and
+golden-set sampling in this project; no other external dataset is used.
+
+**Libraries this project depends on** (see [requirements.txt](requirements.txt)
+for exact version constraints) — all used through their public APIs, no
+vendored or copy-pasted library source:
+- [scikit-learn](https://scikit-learn.org/) — `TfidfVectorizer` + cosine
+  similarity for retrieval ([src/retrieval.py](src/retrieval.py));
+  `TfidfVectorizer` + `LogisticRegression` for intent classification
+  ([src/classifier.py](src/classifier.py)); `sklearn.metrics` for accuracy,
+  macro-F1, precision/recall/F1, confusion matrices, and Cohen's kappa
+  ([src/metrics.py](src/metrics.py), [scripts/compute_judge_human_agreement.py](scripts/compute_judge_human_agreement.py))
+- [SciPy](https://scipy.org/) — `pearsonr`/`spearmanr` for judge/human
+  correlation ([scripts/compute_judge_human_agreement.py](scripts/compute_judge_human_agreement.py))
+- [pandas](https://pandas.pydata.org/) / [NumPy](https://numpy.org/) — all
+  tabular data handling and numeric computation
+- [FastAPI](https://fastapi.tiangolo.com/) / [Uvicorn](https://www.uvicorn.org/) — the demo server ([scripts/demo_server.py](scripts/demo_server.py))
+- [Anthropic Claude API](https://docs.anthropic.com/) — optional LLM-as-judge
+  reply scoring ([src/llm_judge.py](src/llm_judge.py), [src/llm_client.py](src/llm_client.py));
+  the agent's own reply generation is template/retrieval-based and never
+  calls an LLM, so this dependency is judge-only and optional (see
+  "LLM-as-judge" above — real scores are PENDING without a configured key)
+- [joblib](https://joblib.readthedocs.io/) — persisting the trained
+  classifier and retrieval index; [pyarrow](https://arrow.apache.org/) —
+  Parquet I/O for intermediate datasets
+- [pytest](https://pytest.org/) — the test suite (198 tests)
+
+**Methods.** TF-IDF + cosine-similarity retrieval and TF-IDF +
+logistic-regression classification are standard, well-established IR/ML
+techniques, not attributed to a specific paper; no novel algorithm is
+claimed anywhere in this project. Cohen's kappa (weighted) and
+Pearson/Spearman correlation are standard inter-rater-agreement statistics,
+computed via the library implementations cited above, not reimplemented.
+
+**Code originality.** No source file in [`src/`](src/) or [`scripts/`](scripts/)
+was copied or adapted from an external tutorial, Stack Overflow answer, or
+another repository — a repo-wide search for such attributions found none
+because none exist. All architecture, prompts, regexes, and heuristics are
+original to this project.
