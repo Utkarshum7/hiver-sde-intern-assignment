@@ -33,6 +33,23 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+
+# NARROW exception, for deployment only: the two small (~15MB total) trained
+# model/index artifacts the live demo server needs at request time
+# (see src/agent.py DeltaSupportAgent.load()). Everything else under
+# data/processed/ stays excluded — in particular reserved_golden_pool.parquet
+# and dev_corpus.parquet, which must never be committed (the former is the
+# held-out pool the golden set is sampled from). These two files contain
+# only a fitted TF-IDF vectorizer/classifier and the dev-corpus evidence
+# text already public in the Kaggle dataset — no secrets, no held-out data.
+!data/processed/intent_classifier.pkl
+!data/processed/retrieval_index.pkl
+# Explains the display-only redaction applied to retrieval_index.pkl above
+# (see scripts/prepare_deployment_artifacts.py) — small text file, no data.
+!data/processed/DEPLOYMENT_ARTIFACT_NOTE.md
+# Local-only safety backup from the redaction script; never committed.
+data/processed/*.pre_redaction_backup
+
 *.zip
 *.tar.gz
 *.parquet

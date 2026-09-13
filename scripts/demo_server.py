@@ -301,6 +301,16 @@ _HTML_PAGE = """<!doctype html>
   }
   .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #16a34a; }
 
+  /* Visible-but-unobtrusive notice for free-tier hosted deployments that
+     sleep after inactivity (e.g. Render free tier — see render.yaml /
+     README.md "Deploying to Render"). Harmless to show when running
+     locally too; local start-up is fast enough that it's barely noticed. */
+  .wake-notice {
+    background: #f4f6fb; border-bottom: 1px solid var(--border);
+    color: var(--text-faint); font-size: 0.72rem; text-align: center;
+    padding: 0.35rem 1rem;
+  }
+
   /* ---------- App shell: sidebar + main ---------- */
   .app-body { display: flex; align-items: flex-start; }
 
@@ -514,6 +524,8 @@ _HTML_PAGE = """<!doctype html>
     </div>
     <span class="status-badge"><span class="status-dot" aria-hidden="true"></span>Offline demo</span>
   </header>
+
+  <div class="wake-notice">Hosted demo may take a moment to wake up after inactivity.</div>
 
   <div class="app-body">
     <aside class="sidebar" aria-label="Demo navigation">

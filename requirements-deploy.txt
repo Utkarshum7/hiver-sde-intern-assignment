@@ -1,0 +1,29 @@
+# Deployment-only dependency list for the local demo server
+# (scripts/demo_server.py) on a persistent host such as Render.
+#
+# This is DELIBERATELY a subset of requirements.txt, not a replacement for
+# it. requirements.txt is unmodified and remains the source of truth for
+# local development, data preparation, and the test suite — it is NOT
+# proven safe to strip those extra packages from it (build_delta_dataset.py
+# needs pyarrow to read/write parquet, scripts that hit the Kaggle API need
+# kaggle, build scripts use tqdm progress bars, and pytest runs the test
+# suite). None of those are imported by the demo server's runtime code
+# path, so they add unnecessary install size/time/memory on a deploy host
+# without providing anything the demo actually uses.
+#
+# Traced directly from scripts/demo_server.py's actual import graph
+# (demo_server -> src.agent -> src.classifier / src.retrieval /
+# src.escalation / src.reply_generator) — nothing here is guessed.
+#
+# ANTHROPIC_API_KEY / the `anthropic` package are intentionally NOT
+# included: the demo runs fully offline/deterministic without them (see
+# src/reply_generator.py), and no LLM package is imported anywhere in this
+# server's code path.
+
+pandas>=2.2.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+scipy>=1.11.0          # transitive requirement of scikit-learn
+joblib>=1.3.0           # loads the two committed .pkl model/index artifacts
+fastapi>=0.104.0
+uvicorn>=0.24.0

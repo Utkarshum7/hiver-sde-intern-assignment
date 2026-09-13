@@ -1,0 +1,28 @@
+# Render deployment configuration for the Delta Support Intelligence local
+# demo (scripts/demo_server.py). See README.md "Deploying to Render" for
+# the full walkthrough.
+#
+# This deploys ONLY the read-only demo server. It has no effect on, and no
+# dependency relationship with, the evaluation pipeline (scripts/evaluate.py),
+# the golden dataset, reports/, or the measured evaluation metrics — those
+# live entirely outside what this config builds and runs.
+#
+# No API key is required: the demo's reply generation is fully offline and
+# deterministic (see src/reply_generator.py). ANTHROPIC_API_KEY is never
+# referenced here and is not needed for the deployed service to function.
+
+services:
+  - type: web
+    name: delta-support-intelligence-demo
+    runtime: python
+    plan: free
+    branch: master
+    buildCommand: pip install -r requirements-deploy.txt
+    # Render provides $PORT at runtime; must bind 0.0.0.0, not localhost/127.0.0.1,
+    # so traffic from outside the container can reach the process.
+    startCommand: uvicorn scripts.demo_server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.1"
+    # No secret/API-key environment variables are declared or required.

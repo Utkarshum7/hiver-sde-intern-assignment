@@ -217,6 +217,86 @@ facts, or an escalation notice explaining why a human is needed.
 
 ---
 
+## Deploying to Render
+
+The demo server ([scripts/demo_server.py](scripts/demo_server.py)) can be
+deployed as a persistent Python web service on [Render](https://render.com)
+using the included [`render.yaml`](render.yaml). This section covers only
+the demo — it has no relationship to, and no effect on, the evaluation
+pipeline, golden dataset, or measured results (§ below).
+
+**Required model artifacts.** The demo needs exactly two small, derived
+files to run — `data/processed/intent_classifier.pkl` (~2.3 MB) and
+`data/processed/retrieval_index.pkl` (~12.4 MB), together ~15 MB. These are
+normally gitignored (regenerable via `scripts/train_classifier.py` /
+`scripts/build_retrieval_index.py`), but `.gitignore` carries a narrow,
+explicit exception for exactly these two filenames so a host that builds
+from this repository has them available. They contain only a fitted TF-IDF
+vectorizer/classifier and the already-public dev-corpus evidence text (no
+secrets, no held-out/golden data — independently re-verified: zero overlap
+between the indexed conversation IDs and the reserved/golden pool).
+
+`retrieval_index.pkl` additionally has a narrow, display-only redaction
+applied (`scripts/prepare_deployment_artifacts.py`): a small number of
+phone-number- and claim-reference-shaped substrings in the evidence text
+are replaced with a placeholder, while Delta's own repeated public support
+numbers are left as-is. **The TF-IDF vectorizer and matrix that drive
+retrieval ranking are fitted before this step and are completely
+unaffected by it** — see `data/processed/DEPLOYMENT_ARTIFACT_NOTE.md`
+(generated alongside the artifact) for the full disclosure, including
+exactly what did and didn't change and why the locked evaluation results
+are unaffected.
+
+**Steps:**
+1. Push this repository to GitHub (already done) with the two `.pkl`
+   artifacts committed (see above).
+2. In the Render dashboard: New → Blueprint → select this repo. Render
+   reads `render.yaml` automatically and provisions one free-tier Python
+   web service from it.
+3. Render builds with `pip install -r requirements-deploy.txt` — a
+   **deployment-only** dependency list (see "Dependencies for deployment"
+   below) — and starts it with
+   `uvicorn scripts.demo_server:app --host 0.0.0.0 --port $PORT`.
+4. Render provides the `$PORT` environment variable automatically; nothing
+   needs to be configured for it manually. Do not hardcode a port — the
+   start command in `render.yaml` already reads `$PORT` at runtime.
+5. Once deployed, Render gives you a free `https://<service-name>.onrender.com`
+   URL automatically — no separate TLS/domain setup needed.
+
+**No secrets required.** The service declares no API keys or credentials.
+`ANTHROPIC_API_KEY` is never referenced by `render.yaml` and isn't needed —
+the demo's reply generation is fully offline and deterministic.
+
+**Expected cold-start behavior.** Render's free tier puts web services to
+sleep after ~15 minutes of inactivity. The next visitor triggers a cold
+start: Render re-launches the container (roughly 30-60s), and then the
+app's own model/index load adds its usual ~17s on top — so the *first*
+request after a quiet period can take up to roughly a minute before
+responding, even though the service is healthy and will keep responding
+quickly after that. The UI shows a small, permanent notice about this
+("Hosted demo may take a moment to wake up after inactivity.") so a first
+visitor doesn't mistake the wait for a broken deployment.
+
+**Dependencies for deployment.** `requirements.txt` (used for local dev,
+data preparation, and the test suite) is unchanged — removing packages
+from it isn't safe to do without proving every existing workflow still
+works (e.g. `pyarrow` for parquet I/O in `scripts/build_delta_dataset.py`,
+`kaggle` for dataset download, `tqdm` for build-script progress bars,
+`pytest` for the test suite). Instead, [`requirements-deploy.txt`](requirements-deploy.txt)
+is a separate, deployment-only file containing just the packages the demo
+server's code actually imports at request time — traced directly from
+`scripts/demo_server.py`'s import graph (`pandas`, `numpy`, `scikit-learn`,
+`scipy`, `joblib`, `fastapi`, `uvicorn`). This keeps the deployed
+install smaller/faster without touching the file every other workflow
+depends on.
+
+**Running locally** is unchanged from the "Local Demo" section above —
+`python -m uvicorn scripts.demo_server:app --host 127.0.0.1 --port 8000`
+still works exactly as before; `render.yaml` only affects what happens on
+Render, not local usage.
+
+---
+
 ## Reproduction — Golden-Set Annotation (complete; commands kept for reference/audit)
 
 ```powershell
