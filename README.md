@@ -11,6 +11,28 @@ setup, reproduction, architecture, and where things live.
 
 ---
 
+## Live Demo
+
+**[https://delta-support-intelligence-demo.onrender.com](https://delta-support-intelligence-demo.onrender.com)**
+
+Hosted on Render's free tier, built from this repository's
+[`deploy/render-demo`](https://github.com/Utkarshum7/hiver-sde-intern-assignment/tree/deploy/render-demo)
+branch — same 5-field agent contract (`intent`, `reply`, `escalate`,
+`escalation_reason`, `evidence`) as the local demo below, running fully
+offline against the same classifier/retrieval artifacts described in this
+README (no live Delta system access, no LLM API calls). Free-tier services
+sleep after ~15 minutes of inactivity, so the first request after a quiet
+period can take up to ~1 minute to wake up — the UI shows a notice about
+this. See ["Deploying to Render"](#deploying-to-render) below for how it's
+configured, and
+[`data/processed/DEPLOYMENT_ARTIFACT_NOTE.md`](data/processed/DEPLOYMENT_ARTIFACT_NOTE.md)
+for the narrow, display-only text redaction applied to the deployed copy
+of the retrieval evidence (phone numbers / claim-reference codes only —
+does not affect classification, ranking, or any locked evaluation metric
+below).
+
+---
+
 ## Project Status (real, as of this writing)
 
 * **Brand:** `@Delta` — 26,168 reconstructed conversation threads (87,994 messages)
@@ -379,11 +401,59 @@ escalation recall and the quantified regex-coverage gap in
 ## Project Documentation
 
 * [REPORT.md](REPORT.md) — executive summary + full evidence appendix (problem framing, architecture, evaluation methodology, real results, failure analysis, "what's misleading about my headline number," limitations, one-more-week plan)
+* [docs/evaluation_report.md](docs/evaluation_report.md) — the same report content, reorganized under the assignment's exact requested section headings, for quick reviewer cross-checking
 * [docs/requirements_checklist.md](docs/requirements_checklist.md) — final adversarial review, requirement-by-requirement, PASS/PENDING/FAIL with evidence
-* [docs/decision_log.md](docs/decision_log.md) — non-obvious engineering decisions and why
+* [docs/decision_log.md](docs/decision_log.md) — 14 non-obvious engineering decisions, each with alternatives considered, reason, and trade-off
 * [docs/intent_taxonomy.md](docs/intent_taxonomy.md) — intent definitions, real examples, capability boundaries
 * [docs/escalation_policy.md](docs/escalation_policy.md) — escalation decision matrix
 * [docs/retrieval_design.md](docs/retrieval_design.md) — retrieval evidence design & leakage prevention
 * [docs/brand_selection.md](docs/brand_selection.md) — brand candidate empirical analysis
 * [docs/golden_set_methodology.md](docs/golden_set_methodology.md) — sampling & annotation methodology
 * [docs/golden_annotation_guide.md](docs/golden_annotation_guide.md) — annotator instructions
+
+---
+
+## Citations & References
+
+**Dataset.** Kaggle, *Customer Support on Twitter*
+(`thoughtvector/customer-support-on-twitter`), 2,811,774 tweets, 516.5 MB —
+[kaggle.com/datasets/thoughtvector/customer-support-on-twitter](https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter).
+Used for all `@Delta` conversation reconstruction, retrieval evidence, and
+golden-set sampling in this project; no other external dataset is used.
+
+**Libraries this project depends on** (see [requirements.txt](requirements.txt)
+for exact version constraints) — all used through their public APIs, no
+vendored or copy-pasted library source:
+- [scikit-learn](https://scikit-learn.org/) — `TfidfVectorizer` + cosine
+  similarity for retrieval ([src/retrieval.py](src/retrieval.py));
+  `TfidfVectorizer` + `LogisticRegression` for intent classification
+  ([src/classifier.py](src/classifier.py)); `sklearn.metrics` for accuracy,
+  macro-F1, precision/recall/F1, confusion matrices, and Cohen's kappa
+  ([src/metrics.py](src/metrics.py), [scripts/compute_judge_human_agreement.py](scripts/compute_judge_human_agreement.py))
+- [SciPy](https://scipy.org/) — `pearsonr`/`spearmanr` for judge/human
+  correlation ([scripts/compute_judge_human_agreement.py](scripts/compute_judge_human_agreement.py))
+- [pandas](https://pandas.pydata.org/) / [NumPy](https://numpy.org/) — all
+  tabular data handling and numeric computation
+- [FastAPI](https://fastapi.tiangolo.com/) / [Uvicorn](https://www.uvicorn.org/) — the demo server ([scripts/demo_server.py](scripts/demo_server.py))
+- [Anthropic Claude API](https://docs.anthropic.com/) — optional LLM-as-judge
+  reply scoring ([src/llm_judge.py](src/llm_judge.py), [src/llm_client.py](src/llm_client.py));
+  the agent's own reply generation is template/retrieval-based and never
+  calls an LLM, so this dependency is judge-only and optional (see
+  "LLM-as-judge" above — real scores are PENDING without a configured key)
+- [joblib](https://joblib.readthedocs.io/) — persisting the trained
+  classifier and retrieval index; [pyarrow](https://arrow.apache.org/) —
+  Parquet I/O for intermediate datasets
+- [pytest](https://pytest.org/) — the test suite (198 tests)
+
+**Methods.** TF-IDF + cosine-similarity retrieval and TF-IDF +
+logistic-regression classification are standard, well-established IR/ML
+techniques, not attributed to a specific paper; no novel algorithm is
+claimed anywhere in this project. Cohen's kappa (weighted) and
+Pearson/Spearman correlation are standard inter-rater-agreement statistics,
+computed via the library implementations cited above, not reimplemented.
+
+**Code originality.** No source file in [`src/`](src/) or [`scripts/`](scripts/)
+was copied or adapted from an external tutorial, Stack Overflow answer, or
+another repository — a repo-wide search for such attributions found none
+because none exist. All architecture, prompts, regexes, and heuristics are
+original to this project.
